@@ -1,0 +1,7 @@
+site_name: TLD 逻辑组件
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky

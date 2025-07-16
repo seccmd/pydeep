@@ -1,0 +1,29 @@
+# MkDocs
+
+## Install
+
+```
+uv venv
+.venv\Scripts\activate
+uv pip install mkdocs-material
+```
+
+## Creating-your-site 
+
+```
+mkdocs new .
+
+.
+├─ docs/
+│  └─ index.md
+└─ mkdocs.yml
+
+theme:
+  name: material
+```
+  
+## Run
+
+```
+mkdocs serve
+```
