@@ -757,8 +757,9 @@ services:
     ports:
       - ":8080"
     volumes:
-      - ./work:/home/coder/work
-      - ./config.yaml:/home/coder/.config/code-server/config.yaml
+      - ./project:/home/coder/project
+    environment:
+      - PASSWORD=123456789    # Web 登陆密码
     labels:
       - "traefik.enable=true"  # 显式启用
       - "traefik.http.routers.vscode.rule=Host(`vscode.home.xxx.com`)"
@@ -771,15 +772,6 @@ services:
 networks:
   traefik-net:
     external: true
-```
-
-config.yaml
-
-```yaml
-bind-addr: 127.0.0.1:8080
-auth: password
-password: 1234567890
-cert: false
 ```
 
 ## === Jupyter Notebook
