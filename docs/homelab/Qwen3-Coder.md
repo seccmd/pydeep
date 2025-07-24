@@ -97,7 +97,8 @@ npm install -g @anthropic-ai/claude-code
 只需要将Anthropic的base url替换成dashscope上提供的endpoint即可。
 
 ```text
-export ANTHROPIC_BASE_URL=https://dashscope-intl.aliyuncs.com/api/v2/apps/claude-code-proxyexport ANTHROPIC_AUTH_TOKEN=your-dashscope-apikey
+export ANTHROPIC_BASE_URL=https://dashscope-intl.aliyuncs.com/api/v2/apps/claude-code-proxy
+export ANTHROPIC_AUTH_TOKEN=your-dashscope-apikey
 ```
 
 **方案二：使用 claude-code-config 自定义路由**
