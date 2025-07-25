@@ -1,4 +1,35 @@
 # Headscale 是一款开源自托管的 Tailscale
+
+## 快速指令
+
+- https://headscale.net/stable/setup/install/container/
+
+```bash
+
+## Windows 安装包
+https://pkgs.tailscale.com/stable/tailscale-setup-1.86.0-amd64.msi
+
+## Linux 安全
+curl -fsSL https://tailscale.com/install.sh | sh
+
+## 注册服务
+tailscale up --login-server https://headscale.home.xxx.com/
+
+## 操作命令
+headscale users list
+headscale users create u01
+
+docker exec -it headscale headscale users create u01
+docker exec -it headscale headscale nodes register --user u01 --key <key>
+
+docker exec -it headscale headscale preauthkeys create --user 1 --reusable --expiration 24h
+tailscale up --login-server <YOUR_HEADSCALE_URL> --authkey <YOUR_AUTH_KEY>
+
+docker exec -it headscale headscale nodes list
+docker exec -it headscale headscale nodes delete -i <ID>
+```
+
+
 Headscale 是一款开源自托管的 Tailscale 控制服务器实现，专为追求私有化部署、数据自主可控的用户设计。以下从核心价值、技术特性、部署方案、应用场景等维度系统解析其方案设计：
 
 ---
