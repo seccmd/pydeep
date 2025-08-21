@@ -1,5 +1,11 @@
 # git 网络代理
 
+### Flow
+
+```
+[Working Directory] --> $git add --> [Staging Area] --> $git commit --> [Local Repository] --> $git push/pull --> [Remote Repository]
+```
+
 ### 示例：通过 SOCKS5 代理访问 GitHub
 
 git config --global http.proxy 'socks5h://127.0.0.1:1080'
