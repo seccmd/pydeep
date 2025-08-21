@@ -1,5 +1,9 @@
 <!-- markdownlint-disable first-line-h1 -->
 
+- 知识库
+
+  - [GOST](zh-cn/gost.md)
+
 - 入门
 
   - [快速开始](zh-cn/quickstart.md)
