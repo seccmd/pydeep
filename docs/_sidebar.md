@@ -4,7 +4,7 @@
 
   - [GOST](zh-cn/gost.md)
 
-- 指南
+- Homelab
 
   - [Browserless 浏览器自动化](homelab/browser.md)
   - [Click0 无头浏览器部署](homelab/click0.md)
@@ -18,6 +18,15 @@
   - [Windows 配置本地 TLD 开发环境](homelab/windows-tld.md)
   - [个人项目管理与组织](homelab/projects.md)
   - [HomeLab 基础搭建](homelab/homelab.md)
+
+- 网络
+
+  - [Headscale 配置指南](network/headscale.md)
+  - [Headscale 与 Tailscale 集成](network/headscale-tailscale.md)
+  - [NetBird 网络搭建与使用](network/netbird.md)
+  - [批量 IP 操作与管理](network/ip-batch.md)
+  - [SOCKS5 代理配置与应用](network/socks5.md)
+
 
 - 入门
 
