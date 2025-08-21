@@ -25,3 +25,25 @@ Requestly 是一个免费开源的 API 客户端和 HTTP 拦截工具，集成�
 
 - 开源地址：https://github.com/requestly/requestly
 - https://mp.weixin.qq.com/s?__biz=Mzg3NzU0NzIxMA%3D%3D&mid=2247505812&idx=1&sn=9201f59674115d65d1fa15191327ca17
+
+## 1Panel-Halo 学习对象
+
+- https://1panel.cn/
+
+## Zettlr / zotero
+    - **技术栈**：Electron + Vue.js + CodeMirror
+    - **优势**：
+        - 面向学术场景，内置 LaTeX 渲染、文献管理（Zotero 集成）等模块
+        - 代码结构清晰，支持插件扩展（如自定义导出格式）。
+    - **适用场景**：开发科研写作工具、技术文档平台。
+
+## other
+
+- Tauri
+- https://lap.dev/lapce/
+- https://github.com/marktext/marktext/releases
+
+### VSCodium
+
+- [https://vscodium.com/](https://vscodium.com/)
+- [https://github.com/VSCodium/vscodium](https://github.com/VSCodium/vscodium)
