@@ -18,3 +18,10 @@
 Xget URL 转换器 https://xuc.xi-xu.me/
 
 - https://mp.weixin.qq.com/s?__biz=MzkwMTQxODYwNQ%3D%3D&mid=2247483980&idx=1&sn=91238402171e2b298b4d666053b7474d
+
+## Postman Requestly 抓包/改包/Mock/测接口
+
+Requestly 是一个免费开源的 API 客户端和 HTTP 拦截工具，集成了 API 测试、HTTP 请求拦截与修改、API Mocking 等功能。它是一款同时能在浏览器插件和桌面应用上运行的软件，被称为 Postman 和 Charles Proxy 的强大替代品。
+
+- 开源地址：https://github.com/requestly/requestly
+- https://mp.weixin.qq.com/s?__biz=Mzg3NzU0NzIxMA%3D%3D&mid=2247505812&idx=1&sn=9201f59674115d65d1fa15191327ca17
