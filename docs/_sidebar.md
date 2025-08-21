@@ -3,6 +3,7 @@
 - 知识库
 
   - [GOST](zh-cn/gost.md)
+  - [小工具集合](zh-cn/tools.md)
 
 - Homelab
 
@@ -26,7 +27,7 @@
   - [NetBird 网络搭建与使用](network/netbird.md)
   - [批量 IP 操作与管理](network/ip-batch.md)
   - [SOCKS5 代理配置与应用](network/socks5.md)
-
+  - [FRP](network/frp.md)
 
 - 入门
 
