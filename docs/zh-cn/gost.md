@@ -10,7 +10,7 @@
 
 首先在服务器上运行 GOST 服务端：
 
-```Bash
+```bash
 gost -L socks5+tls://:443?cert=/path/to/cert.pem&key=/path/to/key.pem
 ```
 
@@ -23,7 +23,7 @@ gost -L socks5+tls://:443?cert=/path/to/cert.pem&key=/path/to/key.pem
 
 如果你没有现成的证书，可以使用自签名证书（仅测试用）：
 
-```Bash
+```bash
 openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -subj "/CN=example.com"
 ```
 
@@ -31,7 +31,7 @@ openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 36
 
 在本地机器上运行 GOST 客户端：
 
-```Bash
+```bash
 gost -L socks5://:1080 -F socks5+tls://server_ip_or_domain:443
 ```
 
@@ -45,7 +45,7 @@ gost -L socks5://:1080 -F socks5+tls://server_ip_or_domain:443
 1. 配置完成后，你可以将浏览器或其他应用的代理设置为 `127.0.0.1:1080` (SOCKS5)
 2. 或者使用 curl 测试：
 
-```Bash
+```bash
 curl --socks5 127.0.0.1:1080 https://www.example.com
 ```
 
@@ -57,13 +57,13 @@ curl --socks5 127.0.0.1:1080 https://www.example.com
 
 服务端：
 
-```Bash
+```bash
 gost -L socks5+tls://user:pass@:443?cert=/path/to/cert.pem&key=/path/to/key.pem
 ```
 
 客户端：
 
-```Bash
+```bash
 gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 ```
 
