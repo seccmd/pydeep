@@ -1,5 +1,15 @@
 # GOST Clash Tunnel Deploy
 
+## 一键部署脚本
+
+```
+# 一键安装 GOST
+curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/install-gost.sh | bash
+
+# 一键卸载 GOST
+curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/uninstall-gost.sh | bash
+```
+
 ## 一、GOST 服务端安装部署
 
 ### GOST 服务端 任选其一
