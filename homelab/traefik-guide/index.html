@@ -1,0 +1,4108 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../socks5-all-in-one/">
+      
+      
+        <link rel="next" href="../vps-manager/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Traefik 部署文档 - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#traefik" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Traefik 部署文档
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiagent/7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Qwen3-Coder/" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/first-mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/winscan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Qwen3-Coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#traefik_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      单节点 Traefik 部署文档
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="单节点 Traefik 部署文档">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、目标与适用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、部署环境要求
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、部署步骤
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、部署步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-docker-compose-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 使用 Docker Compose 部署 Traefik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-traefik-traefikyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 配置 Traefik 主配置文件 traefik.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 启动 Traefik
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、接入服务（以 Spring Boot 应用为例）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、访问与验证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、常见问题与排查
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、常见问题与排查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 服务无法访问
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. HTTPS 证书申请失败
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dashboard-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dashboard 404
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      七、扩展建议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      八、总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik 极简入门 Demo：快速体验动态路由
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📂 文件结构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 极简配置方案
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 极简配置方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 创建项目目录和文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. docker-compose.yml 内容
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ 启动服务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌐 访问测试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 访问测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法 1：修改 hosts 文件（推荐）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法 2：使用 curl 直接测试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥 查看 Dashboard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 动态添加新服务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧹 清理环境
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 核心概念总结
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik 全流程指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      从零开始基于 Traefik 搭建 HTTP 服务：全流程指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 基础环境准备
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 步骤 1：基础 HTTP 服务搭建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 步骤 1：基础 HTTP 服务搭建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 创建示例网页
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 启动服务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 测试访问
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2https" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 步骤 2：添加HTTPS支持
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 步骤 2：添加HTTPS支持">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 更新 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 创建证书存储文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 更新volumes挂载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 重启服务
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 步骤 3：增强安全性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 步骤 3：增强安全性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 强制HTTPS重定向
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 添加基础认证（Dashboard）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 更新hosts文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 步骤 4：验证服务
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 步骤 4：验证服务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务状态检查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP重定向测试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS服务验证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard访问
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 最终 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 常用操作命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik-Main
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vscode-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      === vscode-web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Jupyter Notebook
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/netbird/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#traefik_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      单节点 Traefik 部署文档
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="单节点 Traefik 部署文档">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、目标与适用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、部署环境要求
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、部署步骤
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、部署步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-docker-compose-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 使用 Docker Compose 部署 Traefik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-traefik-traefikyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 配置 Traefik 主配置文件 traefik.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 启动 Traefik
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、接入服务（以 Spring Boot 应用为例）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、访问与验证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、常见问题与排查
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、常见问题与排查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 服务无法访问
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. HTTPS 证书申请失败
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dashboard-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dashboard 404
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      七、扩展建议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      八、总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik 极简入门 Demo：快速体验动态路由
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📂 文件结构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 极简配置方案
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 极简配置方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 创建项目目录和文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. docker-compose.yml 内容
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ 启动服务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌐 访问测试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 访问测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法 1：修改 hosts 文件（推荐）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法 2：使用 curl 直接测试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      🖥 查看 Dashboard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 动态添加新服务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧹 清理环境
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 核心概念总结
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik 全流程指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      从零开始基于 Traefik 搭建 HTTP 服务：全流程指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 基础环境准备
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 步骤 1：基础 HTTP 服务搭建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 步骤 1：基础 HTTP 服务搭建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 创建示例网页
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 启动服务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 测试访问
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2https" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 步骤 2：添加HTTPS支持
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 步骤 2：添加HTTPS支持">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 更新 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 创建证书存储文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 更新volumes挂载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 重启服务
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 步骤 3：增强安全性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 步骤 3：增强安全性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 强制HTTPS重定向
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 添加基础认证（Dashboard）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 更新hosts文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 步骤 4：验证服务
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 步骤 4：验证服务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务状态检查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP重定向测试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS服务验证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard访问
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 最终 docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 常用操作命令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Traefik-Main
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vscode-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      === vscode-web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      === Jupyter Notebook
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="traefik">Traefik 部署文档</h1>
+<p>以下是基于 <strong>单服务器节点</strong> 的 Traefik 部署方案，专为 <strong>简单场景</strong>（如本地开发、小型测试环境）设计，兼顾易用性和基本功能。</p>
+<hr />
+<h2 id="traefik_1"><strong>单节点 Traefik 部署文档</strong></h2>
+<h3 id="_1"><strong>一、目标与适用场景</strong></h3>
+<ul>
+<li><strong>目标</strong>：  <ul>
+<li>快速部署一个轻量级 Traefik 网关，支持服务路由、HTTPS 和 Dashboard。</li>
+<li>无需高可用、动态服务发现等复杂功能，适合单节点环境。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：  <ul>
+<li>本地开发环境。</li>
+<li>小型测试集群（如单台服务器或 Docker Desktop）。</li>
+<li>快速验证 Traefik 功能。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_2"><strong>二、部署环境要求</strong></h3>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>版本/要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>操作系统</strong></td>
+<td>Linux（Ubuntu/CentOS）或 Docker Desktop（Windows/macOS）</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>&gt;= 20.10.x</td>
+</tr>
+<tr>
+<td><strong>域名</strong></td>
+<td>可选（如需 HTTPS）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_3"><strong>三、部署步骤</strong></h3>
+<h4 id="1-docker-compose-traefik"><strong>1. 使用 Docker Compose 部署 Traefik</strong></h4>
+<p>创建 <code>docker-compose.yml</code> 文件：</p>
+<pre><code class="language-YAML">version: &quot;3&quot;
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    ports:
+      - &quot;80:80&quot;            # HTTP 入口
+      - &quot;443:443&quot;          # HTTPS 入口（可选）
+      - &quot;8080:8080&quot;        # Dashboard 端口
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # 监听 Docker 事件
+      - ./traefik.yml:/etc/traefik/traefik.yml         # 配置文件
+      - ./acme.json:/etc/traefik/acme.json             # Let's Encrypt 证书存储
+    command:
+      - --api.insecure=true                          # 开启 Dashboard（生产环境需关闭）
+      - --providers.docker=true                      # 启用 Docker 服务发现
+      - --entrypoints.web.address=:80                # HTTP 入口
+      - --entrypoints.websecure.address=:443         # HTTPS 入口（可选）
+      - --certificatesresolvers.myresolver.acme.email=admin@example.com
+      - --certificatesresolvers.myresolver.acme.storage=/etc/traefik/acme.json
+      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web  # HTTP 挑战
+</code></pre>
+<h4 id="2-traefik-traefikyml"><strong>2. 配置 Traefik 主配置文件 </strong><strong><code>traefik.yml</code></strong></h4>
+<pre><code class="language-YAML"># traefik.yml
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: &quot;:80&quot;
+  websecure:
+    address: &quot;:443&quot;
+
+providers:
+  docker:
+    endpoint: &quot;unix:///var/run/docker.sock&quot;
+    exposedByDefault: false  # 仅显式标记的服务才会被 Traefik 管理
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: admin@example.com
+      storage: /etc/traefik/acme.json
+      httpChallenge:
+        entryPoint: web
+</code></pre>
+<h4 id="3-traefik"><strong>3. 启动 Traefik</strong></h4>
+<pre><code class="language-Bash">docker-compose up -d
+</code></pre>
+<hr />
+<h3 id="spring-boot"><strong>四、接入服务（以 Spring Boot 应用为例）</strong></h3>
+<p>假设有一个 Spring Boot 应用，通过以下 <code>docker-compose.yml</code> 接入 Traefik：</p>
+<pre><code class="language-YAML">version: &quot;3&quot;
+services:
+  app:
+    image: your-springboot-app:latest
+    container_name: springboot-app
+    ports:
+      - &quot;13080:8080&quot;  # 服务实际端口
+    labels:
+      - &quot;traefik.enable=true&quot;
+      - &quot;traefik.http.routers.app.rule=Host(`app.example.com`)&quot;  # 域名规则
+      - &quot;traefik.http.services.app.loadbalancer.server.port=8080&quot;  # 服务端口
+    networks:
+      - traefik
+    depends_on:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+</code></pre>
+<hr />
+<h3 id="_4"><strong>五、访问与验证</strong></h3>
+<ol>
+<li><strong>Traefik Dashboard</strong>  <ul>
+<li>访问 <code>http://localhost:8080</code> 查看服务状态和路由规则。</li>
+<li>注意：生产环境需关闭 <code>--api.insecure=true</code> 并启用 HTTPS。</li>
+</ul>
+</li>
+<li><strong>服务访问</strong>  <ul>
+<li>如果使用内网环境，直接访问 <code>http://localhost:13080</code>。</li>
+<li>如果绑定域名（如 <code>app.example.com</code>），需在 DNS 中解析域名到服务器 IP，并通过 <code>https://app.example.com</code> 访问（需公网 IP 和域名）。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_5"><strong>六、常见问题与排查</strong></h3>
+<h4 id="1"><strong>1. 服务无法访问</strong></h4>
+<ul>
+<li><strong>原因</strong>：  <ul>
+<li>服务未加入 <code>traefik</code> 网络。</li>
+<li><code>labels</code> 配置错误（如域名冲突、端口不匹配）。</li>
+</ul>
+</li>
+<li><strong>解决</strong>：  <ul>
+<li>检查服务的 <code>networks</code> 是否包含 <code>traefik</code>。</li>
+<li>确保 <code>traefik.http.services.app.loadbalancer.server.port</code> 与服务实际端口一致。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-https"><strong>2. HTTPS 证书申请失败</strong></h4>
+<ul>
+<li><strong>原因</strong>：  <ul>
+<li>域名未解析到服务器 IP。</li>
+<li>HTTP 挑战端口 80 被占用或防火墙限制。</li>
+</ul>
+</li>
+<li><strong>解决</strong>：  <ul>
+<li>确保域名解析正确，且服务器 80 端口对外开放。</li>
+<li>检查防火墙规则（如 <code>ufw</code> 或云服务商安全组）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-dashboard-404"><strong>3. Dashboard 404</strong></h4>
+<ul>
+<li><strong>原因</strong>：  <ul>
+<li>未开启 <code>--api.insecure=true</code>。</li>
+<li>浏览器缓存或配置未生效。</li>
+</ul>
+</li>
+<li><strong>解决</strong>：  <ul>
+<li>检查 <code>docker-compose.yml</code> 中的 <code>command</code> 参数。</li>
+<li>重启 Traefik 容器并刷新页面。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_6"><strong>七、扩展建议</strong></h3>
+<ol>
+<li><strong>启用 HTTPS</strong>  <ul>
+<li>如果服务器有公网 IP 和域名，可启用 Let's Encrypt 自动申请证书。</li>
+<li>修改 <code>traefik.yml</code> 中的 <code>certificatesresolvers</code> 配置，并确保域名解析正确。</li>
+</ul>
+</li>
+<li><strong>添加中间件</strong>  <ul>
+<li>通过 <code>labels</code> 配置限流、身份验证等中间件：</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-YAML">labels:
+  - &quot;traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$H6uskkkW$$IgYV7a8LqGJr0RT5V2y5FQ==&quot;
+  - &quot;traefik.http.routers.app.middlewares=auth&quot;
+</code></pre>
+<ol>
+<li><strong>日志与监控</strong>  <ul>
+<li>启用 <code>log.level: DEBUG</code> 查看详细日志。</li>
+<li>集成 Prometheus 监控（需额外配置）。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_7"><strong>八、总结</strong></h3>
+<p>此方案通过 <strong>单节点 Docker 部署</strong> 实现了 Traefik 的基本功能，适合快速验证和小型场景。核心特点包括：</p>
+<ul>
+<li><strong>简单部署</strong>：仅需 <code>docker-compose.yml</code> 和 <code>traefik.yml</code>。</li>
+<li><strong>动态路由</strong>：通过 Docker 标签自动注册服务。</li>
+<li><strong>HTTPS 支持</strong>：集成 Let's Encrypt（需域名解析）。</li>
+</ul>
+<p>如需升级为生产环境，可参考原案中的高可用架构和 ETCD 集群方案。</p>
+<h2 id="traefik-demo">=== Traefik 极简入门 Demo：快速体验动态路由</h2>
+<p>只需要两个文件和三条命令，即可运行最简单的 Traefik 测试环境：</p>
+<h2 id="_8">📂 文件结构</h2>
+<pre><code class="language-YAML">traefik-demo/
+├── docker-compose.yml    # 核心配置文件
+└── index.html            # 测试页面
+</code></pre>
+<h2 id="_9">🚀 极简配置方案</h2>
+<h3 id="1_1">1. 创建项目目录和文件</h3>
+<pre><code class="language-Bash">mkdir traefik-demo &amp;&amp; cd traefik-demo
+touch docker-compose.yml
+echo &quot;&lt;h1&gt;Traefik 极简演示成功!&lt;/h1&gt;&quot; &gt; index.html
+</code></pre>
+<h3 id="2-docker-composeyml">2. docker-compose.yml 内容</h3>
+<pre><code class="language-YAML">version: '3'
+
+services:
+  # Traefik 网关
+  traefik:
+    image: traefik:v2.10
+    ports:
+      - &quot;80:80&quot;     # HTTP 端口
+      - &quot;8080:8080&quot; # 内置 Dashboard
+    command:
+      - &quot;--api.insecure=true&quot;      # 启用简单 Dashboard
+      - &quot;--providers.docker=true&quot;  # 启用 Docker 自动发现
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  # 演示网站
+  webserver:
+    image: nginx:alpine
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+    labels:
+      - &quot;traefik.http.routers.web.rule=Host(`demo.local`)&quot;
+</code></pre>
+<blockquote>
+<p>总共只有 <strong>13 行</strong>配置代码！</p>
+</blockquote>
+<h2 id="_10">⚡ 启动服务</h2>
+<pre><code class="language-Bash">docker-compose up -d
+</code></pre>
+<h2 id="_11">🌐 访问测试</h2>
+<h3 id="1-hosts">方法 1：修改 hosts 文件（推荐）</h3>
+<pre><code class="language-Bash"># 临时添加本地解析（Linux/Mac）
+sudo -- sh -c &quot;echo '127.0.0.1 demo.local' &gt;&gt; /etc/hosts&quot;
+
+# Windows 在管理员终端执行：
+Add-Content -Path C:\Windows\System32\drivers\etc\hosts -Value &quot;127.0.0.1 demo.local&quot;
+</code></pre>
+<p>然后在浏览器访问：<a href="http://demo.local">http://demo.local</a></p>
+<h3 id="2-curl">方法 2：使用 curl 直接测试</h3>
+<pre><code class="language-Bash"># 直接访问（会显示 404，但证明路由生效）
+curl -H &quot;Host: demo.local&quot; http://localhost
+
+# 查看容器响应内容
+curl -H &quot;Host: demo.local&quot; http://localhost | grep -o &quot;极简演示成功&quot;
+</code></pre>
+<h2 id="dashboard">🖥 查看 Dashboard</h2>
+<p>浏览器访问：<a href="http://localhost:8080">http://localhost:8080</a></p>
+<p>在 Dashboard 中可看到：</p>
+<ul>
+<li>当前运行的路由规则</li>
+<li>后端服务列表</li>
+<li>实时请求统计</li>
+</ul>
+<h2 id="_12">🔄 动态添加新服务</h2>
+<p>不需要修改任何配置，直接在终端运行：</p>
+<pre><code class="language-Bash"># 启动第二个服务（PHP网站）
+docker run -d \
+  --name php-demo \
+  -e PMA_ARBITRARY=1 \
+  -p :80 \
+  --label &quot;traefik.http.routers.php.rule=Host(\`php.local\`)&quot; \
+  php:8.2-apache
+
+# 添加 hosts 解析
+sudo -- sh -c &quot;echo '127.0.0.1 php.local' &gt;&gt; /etc/hosts&quot;
+</code></pre>
+<p>访问：<a href="http://php.local">http://php.local</a> → 显示 PHP 信息页</p>
+<h2 id="_13">🧹 清理环境</h2>
+<pre><code class="language-Bash"># 停止并删除所有服务
+docker-compose down
+
+# 删除动态创建的服务
+docker stop php-demo &amp;&amp; docker rm php-demo
+
+# 恢复 hosts 文件
+sudo sed -i '/demo.local/d' /etc/hosts
+sudo sed -i '/php.local/d' /etc/hosts
+</code></pre>
+<h2 id="_14">🎯 核心概念总结</h2>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Traefik</strong></td>
+<td>智能网关</td>
+<td><code>image: traefik:v2.10</code></td>
+</tr>
+<tr>
+<td><strong>路由规则</strong></td>
+<td>请求转发逻辑</td>
+<td><code>Host(</code>demo.local<code>)</code></td>
+</tr>
+<tr>
+<td><strong>Docker提供者</strong></td>
+<td>自动发现服务</td>
+<td><code>--providers.docker=true</code></td>
+</tr>
+<tr>
+<td><strong>标签 (labels)</strong></td>
+<td>动态配置</td>
+<td><code>traefik.http.routers.web.rule=...</code></td>
+</tr>
+</tbody>
+</table>
+<p>通过这个极简 demo，您已经体验了：</p>
+<ol>
+<li>自动路由配置（无需手动修改Nginx）</li>
+<li>服务动态发现</li>
+<li>零配置网关管理</li>
+<li>实时流量监控</li>
+</ol>
+<p>接下来可以逐步添加 HTTPS、中间件等进阶功能！</p>
+<h2 id="traefik_2">=== Traefik 全流程指南</h2>
+<h2 id="traefik-http">从零开始基于 Traefik 搭建 HTTP 服务：全流程指南</h2>
+<p>下面是从零开始搭建基于 Traefik 的 HTTP 服务的完整流程，包含可操作的详细步骤和验证方法：</p>
+<h2 id="_15">📦 基础环境准备</h2>
+<pre><code class="language-Bash"># 1. 安装 Docker (若未安装)
+sudo apt-get update &amp;&amp; sudo apt-get install -y docker.io docker-compose
+
+# 2. 创建专用目录和网络
+mkdir traefik-http-demo &amp;&amp; cd traefik-http-demo
+docker network create traefik-net
+</code></pre>
+<h2 id="1-http">🔧 步骤 1：基础 HTTP 服务搭建</h2>
+<h3 id="_16">文件结构</h3>
+<pre><code class="language-YAML">traefik-http-demo/
+├── docker-compose.yml
+└── web/
+    └── index.html   # 示例页面
+</code></pre>
+<h3 id="11">1.1 创建示例网页</h3>
+<pre><code class="language-Bash">mkdir web
+echo &quot;&lt;h1&gt;Welcome to Traefik Demo!&lt;/h1&gt;&quot; &gt; web/index.html
+</code></pre>
+<h3 id="12-docker-composeyml">1.2 docker-compose.yml</h3>
+<pre><code class="language-YAML">version: '3'
+
+services:
+  # Traefik 网关
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - &quot;--log.level=INFO&quot;
+      - &quot;--api.insecure=true&quot;         # 启用Dashboard（仅限测试环境）
+      - &quot;--providers.docker=true&quot;     # 启用Docker提供者
+      - &quot;--providers.docker.exposedbydefault=false&quot; # 禁用自动暴露所有容器
+      - &quot;--entrypoints.web.address=:80&quot; # 定义HTTP入口点
+    ports:
+      - &quot;80:80&quot;       # HTTP
+      - &quot;8080:8080&quot;   # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - traefik-net
+
+  # 示例Web服务（Nginx）
+  webapp:
+    image: nginx:alpine
+    container_name: webapp
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    labels:
+      - &quot;traefik.enable=true&quot;  # 显式启用Traefik
+      - &quot;traefik.http.routers.webapp.rule=Host(`demo.local`)&quot; 
+      - &quot;traefik.http.routers.webapp.entrypoints=web&quot; # 使用HTTP入口点
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true
+</code></pre>
+<h3 id="13">1.3 启动服务</h3>
+<pre><code class="language-Bash">docker-compose up -d
+</code></pre>
+<h3 id="14">1.4 测试访问</h3>
+<pre><code class="language-Bash"># 添加本地hosts解析（临时）
+echo &quot;127.0.0.1 demo.local&quot; | sudo tee -a /etc/hosts
+
+# 访问Web服务
+curl http://demo.local
+# 应输出: &lt;h1&gt;Welcome to Traefik Demo!&lt;/h1&gt;
+
+# 查看Dashboard
+curl -I http://localhost:8080/dashboard/
+</code></pre>
+<h2 id="2https">🚀 步骤 2：添加HTTPS支持</h2>
+<h3 id="21-docker-composeyml">2.1 更新 docker-compose.yml</h3>
+<pre><code class="language-YAML">services:
+  traefik:
+    command:
+      # ...保留原有参数...
+      - &quot;--entrypoints.websecure.address=:443&quot; # 新增HTTPS入口点
+      # Let's Encrypt配置
+      - &quot;--certificatesresolvers.myletsencrypt.acme.email=your-email@example.com&quot;
+      - &quot;--certificatesresolvers.myletsencrypt.acme.storage=/etc/traefik/acme.json&quot;
+      - &quot;--certificatesresolvers.myletsencrypt.acme.httpchallenge.entrypoint=web&quot;
+    ports:
+      - &quot;80:80&quot;        # HTTP
+      - &quot;443:443&quot;      # HTTPS（新增）
+      # ...保留Dashboard端口...
+
+  webapp:
+    labels:
+      # ...保留原有标签...
+      # 新增HTTPS配置
+      - &quot;traefik.http.routers.webapp.tls=true&quot;
+      - &quot;traefik.http.routers.webapp.tls.certresolver=myletsencrypt&quot;
+    # ...其他保持不变...
+</code></pre>
+<h3 id="22">2.2 创建证书存储文件</h3>
+<pre><code class="language-Bash">mkdir acme
+touch acme/acme.json
+chmod 600 acme/acme.json  # 关键权限设置
+</code></pre>
+<h3 id="23-volumes">2.3 更新volumes挂载</h3>
+<pre><code class="language-YAML">services:
+  traefik:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme:/etc/traefik/acme  # 持久化存储证书
+</code></pre>
+<h3 id="24">2.4 重启服务</h3>
+<pre><code class="language-Bash">docker-compose down &amp;&amp; docker-compose up -d
+</code></pre>
+<h2 id="3">🔐 步骤 3：增强安全性</h2>
+<h3 id="31-https">3.1 强制HTTPS重定向</h3>
+<pre><code class="language-YAML">services:
+  webapp:
+    labels:
+      # ...保留其他标签...
+      # 添加重定向中间件
+      - &quot;traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https&quot;
+      - &quot;traefik.http.routers.webapp-http.rule=Host(`demo.local`)&quot;
+      - &quot;traefik.http.routers.webapp-http.entrypoints=web&quot;
+      - &quot;traefik.http.routers.webapp-http.middlewares=redirect-to-https&quot;
+</code></pre>
+<h3 id="32-dashboard">3.2 添加基础认证（Dashboard）</h3>
+<pre><code class="language-Bash"># 生成密码
+echo $(htpasswd -nb admin securepassword) | sed -e 's/\$/$$/g'
+# 输出示例: admin:$$apr1$$9iGGLzys$$l5B6ZYTXox.SBKP01X3d./
+</code></pre>
+<pre><code class="language-YAML">services:
+  traefik:
+    command:
+      # ...保留原有参数...
+      # 添加基础认证
+      - &quot;--api.middlewares=dashboard-auth&quot;
+      - &quot;--api.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$9iGGLzys$$l5B6ZYTXox.SBKP01X3d./&quot;
+      - &quot;--entrypoints.dashboard.address=:8080&quot;
+      - &quot;--api.dashboard=true&quot;
+      - &quot;--api.insecure=false&quot;  # 禁用非安全API
+    labels:
+      - &quot;traefik.enable=true&quot;
+      # Dashboard安全路由
+      - &quot;traefik.http.routers.dashboard.rule=Host(`traefik.local`)&quot;
+      - &quot;traefik.http.routers.dashboard.service=api@internal&quot;
+      - &quot;traefik.http.routers.dashboard.middlewares=dashboard-auth&quot;
+      - &quot;traefik.http.routers.dashboard.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.dashboard.tls=true&quot;
+      - &quot;traefik.http.routers.dashboard.tls.certresolver=myletsencrypt&quot;
+</code></pre>
+<h3 id="33-hosts">3.3 更新hosts文件</h3>
+<pre><code class="language-Bash">echo &quot;127.0.0.1 traefik.local&quot; | sudo tee -a /etc/hosts
+</code></pre>
+<h2 id="4">📊 步骤 4：验证服务</h2>
+<h3 id="_17">服务状态检查</h3>
+<pre><code class="language-Bash"># 检查容器状态
+docker ps --format &quot;table {{.Names}}\t{{.Status}}\t{{.Ports}}&quot;
+
+# 输出示例：
+# NAMES        STATUS        PORTS
+# traefik      Up 5 minutes  0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp, 0.0.0.0:8080-&gt;8080/tcp
+# webapp       Up 5 minutes  80/tcp
+</code></pre>
+<h3 id="http">HTTP重定向测试</h3>
+<pre><code class="language-Bash"># HTTP访问应自动跳转到HTTPS
+curl -I http://demo.local
+
+# 应返回：
+# HTTP/1.1 302 Found
+# Location: https://demo.local/
+</code></pre>
+<h3 id="https">HTTPS服务验证</h3>
+<pre><code class="language-Bash"># HTTPS访问应正常
+curl -k https://demo.local
+
+# 证书验证
+openssl s_client -connect demo.local:443 -servername demo.local &lt;/dev/null 2&gt;/dev/null | openssl x509 -noout -dates
+
+# 输出应包含：
+# notBefore=Jul 18 00:00:00 2023 GMT
+# notAfter=Oct 16 00:00:00 2023 GMT
+</code></pre>
+<h3 id="dashboard_1">Dashboard访问</h3>
+<ol>
+<li>浏览器访问 <a href="https://traefik.local">https://traefik.local</a> </li>
+<li>使用用户名 <code>admin</code> 和密码 <code>securepassword</code> 登录</li>
+<li>应看到Traefik Dashboard展示所有路由信息</li>
+</ol>
+<h2 id="docker-composeyml">📝 最终 docker-compose.yml</h2>
+<pre><code class="language-YAML">version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - &quot;--log.level=INFO&quot;
+      - &quot;--providers.docker=true&quot;
+      - &quot;--providers.docker.exposedbydefault=false&quot;
+      - &quot;--entrypoints.web.address=:80&quot;
+      - &quot;--entrypoints.websecure.address=:443&quot;
+      - &quot;--certificatesresolvers.myletsencrypt.acme.email=your-email@example.com&quot;
+      - &quot;--certificatesresolvers.myletsencrypt.acme.storage=/etc/traefik/acme/acme.json&quot;
+      - &quot;--certificatesresolvers.myletsencrypt.acme.httpchallenge.entrypoint=web&quot;
+      - &quot;--api.middlewares=dashboard-auth&quot;
+      - &quot;--api.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$9iGGLzys$$l5B6ZYTXox.SBKP01X3d./&quot;
+      - &quot;--entrypoints.dashboard.address=:8080&quot;
+      - &quot;--api.dashboard=true&quot;
+      - &quot;--api.insecure=false&quot;
+    ports:
+      - &quot;80:80&quot;
+      - &quot;443:443&quot;
+      - &quot;8080:8080&quot;
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme:/etc/traefik/acme
+    networks:
+      - traefik-net
+    labels:
+      - &quot;traefik.enable=true&quot;
+      - &quot;traefik.http.routers.dashboard.rule=Host(`traefik.local`)&quot;
+      - &quot;traefik.http.routers.dashboard.service=api@internal&quot;
+      - &quot;traefik.http.routers.dashboard.middlewares=dashboard-auth&quot;
+      - &quot;traefik.http.routers.dashboard.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.dashboard.tls=true&quot;
+      - &quot;traefik.http.routers.dashboard.tls.certresolver=myletsencrypt&quot;
+
+  webapp:
+    image: nginx:alpine
+    container_name: webapp
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    labels:
+      - &quot;traefik.enable=true&quot;
+      - &quot;traefik.http.routers.webapp.rule=Host(`demo.local`)&quot;
+      - &quot;traefik.http.routers.webapp.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.webapp.tls=true&quot;
+      - &quot;traefik.http.routers.webapp.tls.certresolver=myletsencrypt&quot;
+      # HTTP重定向中间件
+      - &quot;traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https&quot;
+      - &quot;traefik.http.routers.webapp-http.rule=Host(`demo.local`)&quot;
+      - &quot;traefik.http.routers.webapp-http.entrypoints=web&quot;
+      - &quot;traefik.http.routers.webapp-http.middlewares=redirect-to-https&quot;
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true
+</code></pre>
+<h2 id="_18">🔄 常用操作命令</h2>
+<pre><code class="language-Bash"># 查看Traefik日志
+docker logs -f traefik
+
+# 实时路由状态
+curl http://localhost:8080/api/http/routers | jq .
+
+# 动态更新配置（无需重启）
+docker compose up -d --force-recreate webapp
+
+# 移除服务
+docker-compose down --volumes --remove-orphans
+</code></pre>
+<p>至此，您已拥有完整的基于 Traefik 的 HTTPS 服务，包含自动证书管理、安全Dashboard访问和HTTP重定向功能。</p>
+<h2 id="traefik-main">=== Traefik-Main</h2>
+<p>docker-compose.yml</p>
+<pre><code class="language-yaml">version: &quot;3&quot;
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik-main
+    networks:
+      - traefik-net
+    ports:
+      - &quot;80:80&quot;            # HTTP 入口
+      - &quot;443:443&quot;          # HTTPS 入口（可选）
+      - &quot;8080:8080&quot;        # Dashboard 端口
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # 监听 Docker 事件
+      - ./traefik.yml:/etc/traefik/traefik.yml         # 配置文件
+      - ./letsencrypt:/letsencrypt             # Let's Encrypt 证书存储
+    environment:
+      - CLOUDFLARE_EMAIL=admin@qq.com
+      - CLOUDFLARE_DNS_API_TOKEN=
+      - CLOUDFLARE_ZONE_API_TOKEN=
+
+    command:
+      - --api.insecure=true                          # 开启 Dashboard（生产环境需关闭）
+      - --api.dashboard=true
+      - --entrypoints.dashboard.address=:8080
+      - --providers.docker=true                      # 启用 Docker 服务发现
+      - --entrypoints.web.address=:80                # HTTP 入口
+      - --entrypoints.websecure.address=:443         # HTTPS 入口（可选）
+      - --certificatesresolvers.mydnschallenge.acme.tlschallenge=false
+      - --certificatesresolvers.mydnschallenge.acme.dnschallenge=true
+      - --certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.mydnschallenge.acme.email=admin@qq.cm
+      - --certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json
+# 声明网络（关键！）
+networks:
+  traefik-net:
+    external: true  # 引用外部创建的网络
+</code></pre>
+<p>traefik.yml</p>
+<pre><code class="language-yaml"># traefik.yml
+log:
+  level: INFO
+
+api:
+  insecure: true
+  dashboard: true
+  # debug: true  # 可选，开启调试模式
+
+entryPoints:
+  web:
+    address: &quot;:80&quot;
+  websecure:
+    address: &quot;:443&quot;
+
+providers:
+  docker:
+    endpoint: &quot;unix:///var/run/docker.sock&quot;
+    exposedByDefault: false  # 仅显式标记的服务才会被 Traefik 管理
+
+certificatesResolvers:
+  mydnschallenge:
+    acme:
+      email: &quot;admin@qq.cm&quot;
+      storage: /letsencrypt/acme.json
+      dnsChallenge:
+        provider: cloudflare
+</code></pre>
+<h2 id="vscode-web">=== vscode-web</h2>
+<p>docker-compose.yml</p>
+<pre><code class="language-yaml">version: '3.8'
+
+services:
+  vscode-web:
+    image: codercom/code-server
+    container_name: vscode-web
+    networks:
+      - traefik-net
+    ports:
+      - &quot;:8080&quot;
+    volumes:
+      - ./project:/home/coder/project
+    environment:
+      - PASSWORD=123456789    # Web 登陆密码
+    labels:
+      - &quot;traefik.enable=true&quot;  # 显式启用
+      - &quot;traefik.http.routers.vscode.rule=Host(`vscode.home.xxx.com`)&quot;
+      - &quot;traefik.http.services.vscode.loadbalancer.server.port=8080&quot; # 显式声明端口
+      #- &quot;traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$yOgcs058$$hres5BMliUl8A/hGAPhkO1&quot;
+      # 应用中间件到路由
+      #- &quot;traefik.http.routers.vscode.middlewares=auth&quot;
+      - &quot;traefik.http.routers.vscode.entrypoints=websecure&quot;
+      - &quot;traefik.http.routers.vscode.tls.certresolver=mydnschallenge&quot;
+networks:
+  traefik-net:
+    external: true
+</code></pre>
+<h2 id="jupyter-notebook">=== Jupyter Notebook</h2>
+<pre><code class="language-yaml">version: '3'
+
+services:
+  jupyter:
+    image: jupyter/minimal-notebook:latest
+    container_name: my-jupyter
+    networks:
+      - traefik-net
+    ports:
+      - &quot;:8888&quot;
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      #- JUPYTER_TOKEN=&quot;&quot;
+      #- JUPYTER_NOTEBOOK_ARGS=--no-browser --ip=0.0.0.0 --NotebookApp.token=''
+    command:
+      - start-notebook.sh
+      - --NotebookApp.allow_origin='https://colab.research.google.com'
+      - --IdentityProvider.allow_password_change=False
+    restart: unless-stopped
+    labels:
+      - &quot;traefik.enable=true&quot;  # 显式启用
+      - &quot;traefik.http.routers.jupyter.rule=Host(`jupyter.home.xxx.com`)&quot;
+      #- &quot;traefik.http.services.jupyter.loadbalancer.server.port=8888&quot; # 注意指定服务名称：jupyter
+
+networks:
+  traefik-net:
+    external: true
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

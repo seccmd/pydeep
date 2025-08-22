@@ -1,0 +1,2331 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../frontend/vue3-install-tailwindcss-errors/">
+      
+      
+        <link rel="next" href="../browser/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Qwen3-Coder开源：面向世界的智能编程引擎 - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qwen3-coder" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Qwen3-Coder开源：面向世界的智能编程引擎
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiagent/7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/first-mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/winscan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../traefik-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/netbird/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="qwen3-coder">Qwen3-Coder开源：面向世界的智能编程引擎</h1>
+<blockquote>
+<p><strong>作者：阿里云</strong>
+<a href="https://mp.weixin.qq.com/s?__biz=MzA4NjI4MzM4MQ%3D%3D&amp;mid=2660253383&amp;idx=1&amp;sn=1e6554ca14538133e2c462a9c538b0d0"><strong>查看原文</strong></a></p>
+</blockquote>
+<p>刚刚，通义千问最新的AI编程大模型Qwen3-Coder正式开源。</p>
+<p>全新的Qwen3-Coder模型拥有卓越的代码和Agent能力，在Agentic Coding、Agentic Browser-Use 和 Foundational Coding Tasks 上均取得了开源模型的 SOTA 效果。</p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PWfGo6nyrZicBIOofeFjaY7NIVrpuBI9Bhalec0nt4UxmOZVKibuRjdPw/640?wx_fmt=jpeg&amp;from=appmsg" /></p>
+<p>Qwen3-Coder 拥有多个尺寸，今天率先开源当前最强大版本：Qwen3-Coder-480B-A35B-Instruct 模型。它是一个MoE模型，拥有 480B 参数，激活 35B 参数，原生支持 256K 上下文，并可通过 YaRN 扩展到 1M 长度。</p>
+<p>为方便开发者更好地使用 Qwen3-Coder，通义团队还开源了一款命令行工具 Qwen Code，可充分发挥 Qwen3-Coder 在代理式编程上的潜力。此外， Qwen3-Coder 的 API 也可以和 Claude Code、Cline 等工具协同使用。</p>
+<p>目前，Qwen3-Coder 已在魔搭社区、HuggingFace 等平台开源，全球开发者都可以免费下载使用。Qwen3-Coder 很快将接入阿里的AI编程产品通义灵码，API也已上线阿里云百炼。</p>
+<ul>
+<li><em>魔搭社区：</em><a href="https://modelscope.cn/models/Qwen/Qwen3-Coder-480B-A35B-Instruct"><em>https://modelscope.cn/models/Qwen/Qwen3-Coder-480B-A35B-Instruct</em></a></li>
+<li><em>Hugging Face：</em><a href="https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507"><em>https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507</em></a></li>
+<li><em>Qwen Code GitHub：</em><a href="https://github.com/QwenLM/qwen-code"><em>https://github.com/QwenLM/qwen-code</em></a></li>
+</ul>
+<p><strong><em># Qwen-Coder技术亮点</em></strong></p>
+<p><strong><em>// 预训练</em></strong></p>
+<p>通义团队在预训练阶段上仍然在努力，这次 Qwen3-Coder 从不同角度进行 Scaling，以提升模型的代码能力：</p>
+<ul>
+<li>数据扩展：总计 7.5T（代码占比 70%），在保持通用与数学能力的同时，具备卓越的编程能力；</li>
+<li>上下文扩展：原生支持 256K 上下文，借助 YaRN 可拓展至 1M，专为仓库级和动态数据（如 Pull Request）优化，助力 Agentic Coding；</li>
+<li>合成数据扩展：利用 Qwen2.5-Coder 对低质数据进行清洗与重写，显著提升整体数据质量。</li>
+</ul>
+<p><strong><em>// 后训练</em></strong></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_png/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5P5GoIezibFPUe5DQ6jsjK9wtSI7gn5KM8QfRB2RmdLIfr94sRDXRTosg/640?wx_fmt=png&amp;from=appmsg" /></p>
+<p>与当前社区普遍聚焦于竞赛类代码生成不同，通义团队认为所有的代码任务天然适合执行驱动的大规模强化学习。因此通义团队选择在更丰富的真实代码任务上扩展 Code RL 训练。</p>
+<p>通过自动扩展测试样例，通义团队构造了大量高质量的训练实例，成功释放了强化学习的潜力：不仅显著提升了代码执行成功率，还对其他任务带来增益。这将鼓励通义团队继续寻找 Hard to Solve, Easy to Verify 的任务，作为强化学习的土壤。</p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PEE3BUoAJvWNaEgiaQ6jX2AjjLLibYcgx4ibJX5J7nDEThicZRUDvKQcRow/640?wx_fmt=jpeg&amp;from=appmsg" /></p>
+<p>在真实世界的 Software Engneering Task，比如 SWE-Bench，模型需要在环境中不断交互，自主规划、选择工具调用、接受反馈不断做出新决策，这是一个典型的 Long-Horizon RL 任务。</p>
+<p>通义团队在 Qwen3-Coder 的后训练阶段执行了 Agent RL，鼓励模型通过多轮交互的方式利用工具解决问题。Agent RL 的主要挑战在于 Environment Scaling，通义团队实现了可验证环境的扩展系统，借助阿里云的基础设施，实现同时运行 20k 独立环境。</p>
+<p>这一套基础设施可以提供大规模的强化学习反馈和评测，最终通义团队在 SWE-bench Verified 上实现了开源模型 SOTA 的效果。</p>
+<p><strong><em># 和Qwen3-Coder一起Coding</em></strong></p>
+<p>Qwen3-Coder 可以和社区优秀的编程工具结合，如 Claude Code、Cline 等，作为一款基础模型，我们期待在数字世界的任何角落都可以使用它，Agentic Coding in the World!</p>
+<p><strong>// Qwen Coder</strong></p>
+<p>Qwen Code 是一个 CLI 工具，修改自 Gemini CLI，针对 Qwen3‑Coder系列的模型增强了解析器和工具支持。</p>
+<p>确保已安装 Node.js 20 及以上版本，可以通过以下命令安装：</p>
+<pre><code class="language-text">curl -qL https://www.npmjs.com/install.sh | sh
+</code></pre>
+<p>然后通过 npm 管理器安装 Qwen Code：</p>
+<pre><code class="language-text">npm i -g @qwen-code/qwen-code
+</code></pre>
+<p>另一种方式是从源码安装：</p>
+<pre><code class="language-text"> `git clone https://github.com/QwenLM/qwen-code.git` 
+ `cd qwen-code &amp;&amp; npm install &amp;&amp; npm install -g`
+</code></pre>
+<p>Qwen Code 支持 OpenAI SDK 调用 LLM，你可以导出以下环境变量，或者简单地将其放在 .envfile中。</p>
+<pre><code class="language-text">export OPENAI_API_KEY=&quot;your_api_key_here&quot;
+export OPENAI_BASE_URL=&quot;https://dashscope-intl.aliyuncs.com/compatible-mode/v1&quot;
+export OPENAI_MODEL=&quot;qwen3-coder-plus&quot;
+</code></pre>
+<p>现在，你可以通过简单地输入 「qwen」来享受 Qwen-Code 和 Qwen 带来的编程体验。</p>
+<p><strong><em>// Claude Code</em></strong></p>
+<p>除了 Qwen Code 之外，现在还可以将 Qwen3‑Coder 与 Claude Code 搭配使用。只需在阿里云百炼平台<a href="https://bailian.console.aliyun.com/申请">https://bailian.console.aliyun.com/申请</a> API Key，并安装 Claude Code，即可开始畅享编码体验。</p>
+<pre><code class="language-text">npm install -g @anthropic-ai/claude-code
+</code></pre>
+<p>通义团队提供了两种接入方式，帮助你无缝地用 Qwen3‑Coder 进行编码。</p>
+<p><strong>方案一：使用dashscope提供的代理  API</strong></p>
+<p>只需要将Anthropic的base url替换成dashscope上提供的endpoint即可。</p>
+<pre><code class="language-text">export ANTHROPIC_BASE_URL=https://dashscope-intl.aliyuncs.com/api/v2/apps/claude-code-proxy
+export ANTHROPIC_AUTH_TOKEN=your-dashscope-apikey
+</code></pre>
+<p><strong>方案二：使用 claude-code-config 自定义路由</strong></p>
+<p>claude-code-router 是一个第三方的路由工具，用于为 Claude Code 灵活地切换不同的后端 API。dashScope平台提供了一个简单的扩展包 claude-code-config，可为 claude-code-router 生成包含 dashScope 支持的默认配置。</p>
+<pre><code class="language-text">npm install -g @musistudio/claude-code-router
+npm install -g @dashscope-js/claude-code-config
+</code></pre>
+<p>生成配置文件和插件目录：</p>
+<pre><code class="language-text">ccr-dashscope
+</code></pre>
+<p>该命令会自动生成 ccr 所需的配置文件和插件目录。你也可以手动调整 ~/.claude-code-router/config.json 和 ~/.claude-code-router/plugins/ 中的配置。</p>
+<p>最后，通过 ccr 开始使用 Claude Code：</p>
+<pre><code class="language-text">ccr code
+</code></pre>
+<p>至此，你即可通过 ccr 使用 Claude Code 畅享 Qwen3‑Coder 的强大编码能力。祝开发顺利！</p>
+<p><strong><em>// Cline</em></strong></p>
+<p><img alt="" src="http://mmbiz.qpic.cn/sz_mmbiz_jpg/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5Pa27nZiaiamib7mnbq5hcMgYH35oc4XIibTOiaic0hRdQd1uot73IafYhUXbA/0?wx_fmt=jpeg" /></p>
+<p>配置 Qwen3-Coder-480B-A35B-instruct 以使用 cline：</p>
+<p>‒ 进入 cline 的配置设置</p>
+<p>‒ 选择“OpenAI Compatible”模式</p>
+<p>‒ 在 OpenAI Compatible API tokens处，输入从 Dashscope 获取的密钥</p>
+<p>‒ 勾选“使用自定义基础 URL”，并输入：<a href="https://dashscope.aliyuncs.com/compatible-mode/v1">https://dashscope.aliyuncs.com/compatible-mode/v1</a></p>
+<p>‒ 输入模型名称：qwen3-coder-plus</p>
+<p><strong><em># Demo展示</em></strong></p>
+<p>以下是使用Qwen3-Coder制作的动画与小游戏。</p>
+<p><em>Demo：烟囱拆迁</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PDSW568d38zeRUbmQ7wCOutOicKvhILMKG3X0lTZNHIf01Gm0ib0wW2oA/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><em>Demo：本地开发端中生成烟花动画</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PGa1DHNicxlic62X63V03k76Xs57Xiad49L9MwMgribibibQTVTOtGTtaEdeg/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><em>Demo：打字测速演示</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PgGmuVQc1XdhGOVYFIxKczfseyqic2nw2Sg39ty7k8VgQlgiaibgg3zljA/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><em>Demo：小球沿立方体轨迹旋转</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PYxcZoIlemj4P4VdEgXKtRSZkDItSOYtNErzfkfWnWj3F9fVxiav1CTg/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><em>Demo：模拟太阳系行星运转</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PPeXiaFu9UOOZlF0OTSN1lUvp37hpfxyCqrKjd6icN5wEna7q8nuN7gMA/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><em>Demo：二重奏游戏</em></p>
+<p><img alt="" src="https://mmbiz.qpic.cn/sz_mmbiz_gif/V3ll7FMyGyOkHSjHFm3iaMicPhH73JIY5PnY86JWpF8hDPhYtX1SvDic88dU57ajACtpFWiaJrXwVZNYOiciaPhNVowg/640?wx_fmt=gif&amp;from=appmsg" /></p>
+<p><strong><em># API调用</em></strong></p>
+<p>如果你想要通过百炼 API 平台（<a href="https://bailian.console.aliyun.com/）调用">https://bailian.console.aliyun.com/）调用</a> Qwen3-Coder，欢迎使用以下示例代码进行测试。</p>
+<pre><code class="language-text">import osfrom openai import OpenAI
+client = OpenAI(    api_key=os.getenv(&quot;DASHSCOPE_API_KEY&quot;),    base_url=&quot;https://dashscope.aliyuncs.com/compatible-mode/v1&quot;,)
+prompt = &quot;Help me create a web page for an online bookstore.&quot;
+
+# Send request to qwen3-coder-plus modelcompletion = client.chat.completions.create(    model=&quot;qwen3-coder-plus&quot;,    messages=[        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a helpful assistant.&quot;},        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}    ],)
+# Print the responseprint(completion.choices[0].message.content.strip())
+</code></pre>
+<p><strong><em># 未来展望</em></strong></p>
+<p>通义团队仍在继续努力提升 Coding Agent 的效果，希望它能承担更多复杂软件工程中的繁琐任务，解放人类的生产力。Qwen3-Coder 仍有更多尺寸在路上，在保证良好效果的同时降低部署的开销。另外通义团队也在积极探索 Coding Agent 是否能够实现 self-improving，这是一个令人激动的话题。</p>
+<p>/ END /</p>
+<p><em>更多Qwen模型一手资讯，请关注👇👇👇</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

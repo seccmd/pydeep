@@ -1,0 +1,3248 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../git/">
+      
+      
+        <link rel="next" href="../nginx-proxy-manager%E2%80%8B%E2%80%8B/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Github in One - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#github-in-one" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Github in One
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiagent/7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homelab/Qwen3-Coder/" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/first-mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub上传指导文档
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 准备工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 准备工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 安装Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 配置Git用户信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 创建GitHub账户
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 上传步骤
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 上传步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1git" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤1：初始化本地Git仓库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2git" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤2：添加文件到Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤3：创建首次提交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4github" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤4：在GitHub创建远程仓库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5github" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤5：连接本地仓库到GitHub
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 身份验证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 身份验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1personal-access-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法1：使用Personal Access Token（推荐）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法2：使用SSH密钥
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 后续维护
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 后续维护">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      日常提交流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      提交信息规范
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      分支管理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 项目结构说明
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 项目结构说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      .gitignore 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      README.md 文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 常见问题解决
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 常见问题解决">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 推送被拒绝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 忘记添加.gitignore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 修改最后一次提交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 撤销提交
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌟 最佳实践
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌟 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 提交频率
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 分支策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 代码审查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 文档维护
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 相关资源
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../winscan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/Qwen3-Coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/traefik-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/netbird/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub上传指导文档
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 准备工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 准备工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 安装Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 配置Git用户信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 创建GitHub账户
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 上传步骤
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 上传步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1git" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤1：初始化本地Git仓库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2git" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤2：添加文件到Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤3：创建首次提交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4github" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤4：在GitHub创建远程仓库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5github" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤5：连接本地仓库到GitHub
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 身份验证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 身份验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1personal-access-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法1：使用Personal Access Token（推荐）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法2：使用SSH密钥
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 后续维护
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 后续维护">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      日常提交流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      提交信息规范
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      分支管理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 项目结构说明
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 项目结构说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      .gitignore 文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      README.md 文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 常见问题解决
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 常见问题解决">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 推送被拒绝
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 忘记添加.gitignore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 修改最后一次提交
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 撤销提交
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      🌟 最佳实践
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌟 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 提交频率
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 分支策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 代码审查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 文档维护
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 相关资源
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="github-in-one">Github in One</h1>
+<h2 id="github">GitHub上传指导文档</h2>
+<p>本文档将详细指导您如何将AI问答机器人项目上传到GitHub，包括Git环境配置、仓库创建、代码提交等完整流程。</p>
+<h2 id="_1">📋 准备工作</h2>
+<h3 id="1-git">1. 安装Git</h3>
+<p>如果您还没有安装Git，请先安装：</p>
+<p><strong>Windows:</strong></p>
+<ul>
+<li>下载并安装：<a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
+<li>或使用包管理器：<code>winget install Git.Git</code></li>
+</ul>
+<p><strong>macOS:</strong></p>
+<pre><code class="language-Bash"># 使用Homebrew
+brew install git
+
+# 或使用Xcode命令行工具
+xcode-select --install
+</code></pre>
+<p><strong>Linux (Ubuntu/Debian):</strong></p>
+<pre><code class="language-Bash">sudo apt update
+sudo apt install git
+</code></pre>
+<h3 id="2-git">2. 配置Git用户信息</h3>
+<pre><code class="language-Bash"># 设置用户名（将显示在提交记录中）
+git config --global user.name &quot;您的用户名&quot;
+
+# 设置邮箱（建议使用GitHub邮箱）
+git config --global user.email &quot;your.email@example.com&quot;
+
+# 验证配置
+git config --global --list
+</code></pre>
+<h3 id="3-github">3. 创建GitHub账户</h3>
+<p>如果您还没有GitHub账户：</p>
+<ol>
+<li>访问 <a href="https://github.com">https://github.com</a></li>
+<li>点击"Sign up"注册账户</li>
+<li>验证邮箱地址</li>
+</ol>
+<h2 id="_2">🚀 上传步骤</h2>
+<h3 id="1git">步骤1：初始化本地Git仓库</h3>
+<p>在项目根目录（<code>ai-chatbot-demo</code>）中打开终端：</p>
+<pre><code class="language-Bash"># 初始化Git仓库
+git init
+
+# 查看当前状态
+git status
+</code></pre>
+<h3 id="2git">步骤2：添加文件到Git</h3>
+<pre><code class="language-Bash"># 添加所有文件到暂存区
+git add .
+
+# 或者选择性添加文件
+git add README.md
+git add frontend/
+git add backend/
+git add docs/
+
+# 查看暂存区状态
+git status
+</code></pre>
+<h3 id="3">步骤3：创建首次提交</h3>
+<pre><code class="language-Bash"># 创建首次提交
+git commit -m &quot;🎉 初始提交：AI问答机器人演示系统
+
+- ✅ 完整的前后端架构
+- ✅ Vue3 + FastAPI 技术栈
+- ✅ DeepSeek AI模型集成
+- ✅ 详细的学习文档
+- ✅ 一键启动脚本&quot;
+
+# 查看提交历史
+git log --oneline
+</code></pre>
+<h3 id="4github">步骤4：在GitHub创建远程仓库</h3>
+<ol>
+<li>
+<p><strong>登录GitHub</strong>：访问 <a href="https://github.com">https://github.com</a> 并登录</p>
+</li>
+<li>
+<p><strong>创建新仓库</strong>：</p>
+</li>
+<li>
+<p>点击右上角的 "+" 按钮</p>
+</li>
+<li>
+<p>选择 "New repository"</p>
+</li>
+<li>
+<p><strong>配置仓库信息</strong>：</p>
+</li>
+<li>
+<p><strong>Repository name</strong>: <code>ai-chatbot-demo</code></p>
+</li>
+<li><strong>Description</strong>: <code>基于Vue3+FastAPI的AI问答机器人演示系统，集成DeepSeek大模型</code></li>
+<li><strong>Visibility</strong>: 选择 Public（公开）或 Private（私有）</li>
+<li><strong>不要</strong>勾选 "Add a README file"（我们已经有了）</li>
+<li><strong>不要</strong>勾选 "Add .gitignore"（我们已经创建了）</li>
+<li>
+<p><strong>License</strong>: 可选择 MIT License</p>
+</li>
+<li>
+<p><strong>点击 "Create repository"</strong></p>
+</li>
+</ol>
+<h3 id="5github">步骤5：连接本地仓库到GitHub</h3>
+<p>复制GitHub提供的仓库URL，然后在本地执行：</p>
+<pre><code class="language-Bash"># 添加远程仓库（替换为您的实际URL）
+git remote add origin https://github.com/您的用户名/ai-chatbot-demo.git
+
+# 验证远程仓库
+git remote -v
+
+# 推送代码到GitHub
+git push -u origin main
+</code></pre>
+<p>如果遇到分支名称问题，可能需要：</p>
+<pre><code class="language-Bash"># 重命名分支为main（GitHub默认分支名）
+git branch -M main
+
+# 然后再推送
+git push -u origin main
+</code></pre>
+<h2 id="_3">🔐 身份验证</h2>
+<h3 id="1personal-access-token">方法1：使用Personal Access Token（推荐）</h3>
+<ol>
+<li>
+<p><strong>生成Token</strong>：</p>
+</li>
+<li>
+<p>访问 GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)</p>
+</li>
+<li>点击 "Generate new token (classic)"</li>
+<li>设置过期时间和权限（至少需要 <code>repo</code> 权限）</li>
+<li>
+<p>复制生成的token（只显示一次）</p>
+</li>
+<li>
+<p><strong>使用Token</strong>：</p>
+</li>
+</ol>
+<pre><code class="language-Bash"># 推送时使用token作为密码
+git push -u origin main
+# 用户名：您的GitHub用户名
+# 密码：刚才生成的token
+</code></pre>
+<h3 id="2ssh">方法2：使用SSH密钥</h3>
+<ol>
+<li><strong>生成SSH密钥</strong>：</li>
+</ol>
+<pre><code class="language-Bash"># 生成新的SSH密钥
+ssh-keygen -t ed25519 -C &quot;your.email@example.com&quot;
+
+# 启动ssh-agent
+eval &quot;$(ssh-agent -s)&quot;
+
+# 添加密钥到ssh-agent
+ssh-add ~/.ssh/id_ed25519
+</code></pre>
+<ol>
+<li><strong>添加公钥到GitHub</strong>：</li>
+</ol>
+<pre><code class="language-Bash"># 复制公钥内容
+cat ~/.ssh/id_ed25519.pub
+</code></pre>
+<pre><code>- 访问 GitHub Settings → SSH and GPG keys
+- 点击 &quot;New SSH key&quot;
+- 粘贴公钥内容
+</code></pre>
+<ol>
+<li><strong>使用SSH URL</strong>：</li>
+</ol>
+<pre><code class="language-Bash"># 更改远程仓库URL为SSH格式
+git remote set-url origin git@github.com:您的用户名/ai-chatbot-demo.git
+</code></pre>
+<h2 id="_4">📝 后续维护</h2>
+<h3 id="_5">日常提交流程</h3>
+<pre><code class="language-Bash"># 1. 查看文件变更
+git status
+
+# 2. 添加变更文件
+git add .
+# 或选择性添加
+git add 文件名
+
+# 3. 提交变更
+git commit -m &quot;📝 更新说明：具体修改内容&quot;
+
+# 4. 推送到GitHub
+git push
+</code></pre>
+<h3 id="_6">提交信息规范</h3>
+<p>建议使用以下格式的提交信息：</p>
+<pre><code class="language-Bash"># 功能添加
+git commit -m &quot;✨ 新增：添加用户认证功能&quot;
+
+# 问题修复
+git commit -m &quot;🐛 修复：解决API响应超时问题&quot;
+
+# 文档更新
+git commit -m &quot;📝 文档：更新部署指南&quot;
+
+# 性能优化
+git commit -m &quot;⚡ 优化：提升数据库查询性能&quot;
+
+# 代码重构
+git commit -m &quot;♻️ 重构：优化组件结构&quot;
+
+# 样式调整
+git commit -m &quot;💄 样式：调整聊天界面布局&quot;
+
+# 测试相关
+git commit -m &quot;✅ 测试：添加API单元测试&quot;
+</code></pre>
+<h3 id="_7">分支管理</h3>
+<pre><code class="language-Bash"># 创建新分支
+git checkout -b feature/新功能名称
+
+# 切换分支
+git checkout main
+git checkout feature/新功能名称
+
+# 合并分支
+git checkout main
+git merge feature/新功能名称
+
+# 删除分支
+git branch -d feature/新功能名称
+
+# 推送分支到GitHub
+git push origin feature/新功能名称
+</code></pre>
+<h2 id="_8">📁 项目结构说明</h2>
+<p>确保以下重要文件已正确配置：</p>
+<h3 id="gitignore">.gitignore 文件</h3>
+<pre><code class="language-Markdown"># 环境变量文件
+.env
+.env.local
+
+# 依赖目录
+node_modules/
+__pycache__/
+
+# 构建输出
+dist/
+build/
+
+# 数据库文件
+*.db
+*.sqlite
+
+# 日志文件
+logs/
+*.log
+</code></pre>
+<h3 id="readmemd"><a href="http://README.md">README.md</a> 文件</h3>
+<p>确保包含：</p>
+<ul>
+<li>项目描述</li>
+<li>安装说明</li>
+<li>使用方法</li>
+<li>技术栈</li>
+<li>贡献指南</li>
+</ul>
+<h2 id="_9">🔧 常见问题解决</h2>
+<h3 id="1">1. 推送被拒绝</h3>
+<pre><code class="language-Bash"># 如果远程仓库有更新，先拉取
+git pull origin main
+
+# 解决冲突后再推送
+git push origin main
+</code></pre>
+<h3 id="2-gitignore">2. 忘记添加.gitignore</h3>
+<pre><code class="language-Bash"># 如果已经提交了不应该提交的文件
+git rm --cached 文件名
+git commit -m &quot;🗑️ 移除：删除不应该提交的文件&quot;
+</code></pre>
+<h3 id="3_1">3. 修改最后一次提交</h3>
+<pre><code class="language-Bash"># 修改最后一次提交信息
+git commit --amend -m &quot;新的提交信息&quot;
+
+# 添加文件到最后一次提交
+git add 遗漏的文件
+git commit --amend --no-edit
+</code></pre>
+<h3 id="4">4. 撤销提交</h3>
+<pre><code class="language-Bash"># 撤销最后一次提交（保留文件修改）
+git reset --soft HEAD~1
+
+# 完全撤销最后一次提交
+git reset --hard HEAD~1
+</code></pre>
+<h2 id="_10">🌟 最佳实践</h2>
+<h3 id="1_1">1. 提交频率</h3>
+<ul>
+<li>经常提交小的、逻辑完整的更改</li>
+<li>避免一次提交大量不相关的修改</li>
+</ul>
+<h3 id="2">2. 分支策略</h3>
+<ul>
+<li><code>main</code> 分支：稳定的生产代码</li>
+<li><code>develop</code> 分支：开发中的代码</li>
+<li><code>feature/*</code> 分支：新功能开发</li>
+<li><code>hotfix/*</code> 分支：紧急修复</li>
+</ul>
+<h3 id="3_2">3. 代码审查</h3>
+<ul>
+<li>使用Pull Request进行代码审查</li>
+<li>添加详细的PR描述</li>
+<li>确保CI/CD检查通过</li>
+</ul>
+<h3 id="4_1">4. 文档维护</h3>
+<ul>
+<li><a href="http://xn--README-o35jo69i8ram3f.md">及时更新README.md</a></li>
+<li>维护API文档</li>
+<li>记录重要的架构决策</li>
+</ul>
+<h2 id="_11">📚 相关资源</h2>
+<ul>
+<li><a href="https://git-scm.com/doc">Git官方文档</a></li>
+<li><a href="https://docs.github.com/">GitHub官方指南</a></li>
+<li><a href="https://www.conventionalcommits.org/">Git提交信息规范</a></li>
+<li><a href="https://guides.github.com/introduction/flow/">GitHub Flow工作流</a></li>
+</ul>
+<hr />
+<p>🎉 <strong>恭喜！</strong> 您的AI问答机器人项目现在已经成功上传到GitHub了！</p>
+<p>记住定期推送您的代码更改，并保持良好的提交习惯。这样不仅能保护您的代码，还能让其他开发者更容易理解和贡献您的项目。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

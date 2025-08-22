@@ -1,0 +1,2737 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ip-batch/">
+      
+      
+        <link rel="next" href="../socks5/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>基于Netbird开源平台独立部署 - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#netbird" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基于Netbird开源平台独立部署
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiagent/7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homelab/Qwen3-Coder/" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/first-mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/winscan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/Qwen3-Coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/traefik-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、环境准备
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、服务端部署
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、服务端部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1netbird" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤1：一键安装NetBird
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤2：访问管理控制台
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      自定义配置（可选）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、客户端接入
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、客户端接入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装客户端
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      验证连接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、网络实验环境配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、网络实验环境配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 访问控制策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sd-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 站点间互联（SD-WAN）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 中继模式优化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、维护与监控
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、高级功能扩展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、环境准备
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、服务端部署
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、服务端部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1netbird" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤1：一键安装NetBird
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      步骤2：访问管理控制台
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      自定义配置（可选）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、客户端接入
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、客户端接入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装客户端
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      验证连接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、网络实验环境配置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、网络实验环境配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 访问控制策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sd-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 站点间互联（SD-WAN）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 中继模式优化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、维护与监控
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、高级功能扩展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="netbird">基于Netbird开源平台独立部署</h1>
+<p><a href="https://www.wolai.com/hNNZXsKCFfjdiHCaXK8jDd">资讯：全球CFO遭钓鱼攻击，黑客利用合法工具NetBird实施精准打击</a></p>
+<p><a href="https://www.wolai.com/cdBBXGAGhM7sP4u2oVbAgX">鱼叉式钓鱼警报：NetBird 远程访问木马借虚假招聘传播</a></p>
+<p><a href="https://www.wolai.com/3xcjJPFkyQTD47LQ2nA6HA">告别复杂配置！NetBird助你轻松构建安全私有网络</a></p>
+<p><a href="https://www.wolai.com/wNj4Vv74osbfSfP7F5prFV">15.1k star！告别复杂网络配置！NetBird让企业异地组网变得超简单</a></p>
+<p>以下是一套基于Netbird开源平台的独立部署实施方案，适用于搭建私有网络实验环境。方案结合官方文档和社区实践，涵盖环境准备、服务端部署、客户端接入、网络配置及维护全流程，确保高效安全。</p>
+<hr />
+<h3 id="_1"><strong>一、环境准备</strong></h3>
+<ol>
+<li>
+<p><strong>服务器要求</strong></p>
+</li>
+<li>
+<p><strong>配置</strong>：Linux VM（推荐Debian/Ubuntu/CentOS），最低1核CPU、2GB内存、10GB存储。</p>
+</li>
+<li>
+<p><strong>网络</strong>：</p>
+<ul>
+<li>开放 <strong>TCP端口</strong>：80（HTTP）、443（HTTPS）、33073（管理）、10000（信令服务）。</li>
+<li>开放 <strong>UDP端口</strong>：3478（STUN/TURN）、49152-65535（P2P通信）。</li>
+</ul>
+</li>
+<li>
+<p><strong>域名</strong>：需准备一个指向服务器公网IP的域名（如<code>netbird.example.com</code>），并提前配置DNS解析。</p>
+</li>
+<li>
+<p><strong>依赖软件</strong></p>
+</li>
+<li>安装Docker与Docker Compose（推荐最新版）：</li>
+</ol>
+<pre><code class="language-Bash">curl -fsSL https://get.docker.com | sh
+curl -L &quot;https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+</code></pre>
+<pre><code>- 安装工具包：`jq`（JSON处理）、`curl`（网络请求）：  
+</code></pre>
+<pre><code class="language-Bash">sudo apt install -y jq curl  # Debian/Ubuntu
+sudo yum install -y jq curl  # CentOS/RHEL
+</code></pre>
+<hr />
+<h3 id="_2"><strong>二、服务端部署</strong></h3>
+<h4 id="1netbird"><strong>步骤1：一键安装NetBird</strong></h4>
+<pre><code class="language-Bash">export NETBIRD_DOMAIN=netbird.example.com  # 替换为你的域名
+curl -fsSL https://github.com/netbirdio/netbird/releases/latest/download/getting-started-with-zitadel.sh | bash
+</code></pre>
+<ul>
+<li>
+<p><strong>输出结果</strong>：脚本自动生成管理员账号（如<code>admin@netbird.example.com</code>）和随机密码，保存至终端。</p>
+</li>
+<li>
+<p><strong>自动完成</strong>：</p>
+</li>
+<li>
+<p>部署NetBird管理服务、Signal服务、STUN/TURN服务（Coturn）、Zitadel身份认证服务。</p>
+</li>
+<li>申请Let's Encrypt SSL证书，启用HTTPS加密。</li>
+</ul>
+<h4 id="2"><strong>步骤2：访问管理控制台</strong></h4>
+<ol>
+<li>
+<p>登录URL：<code>https://&lt;你的域名&gt;</code>（如<code>https://netbird.example.com</code>）。</p>
+</li>
+<li>
+<p><strong>初始配置</strong>：</p>
+</li>
+<li>
+<p>修改默认密码，启用双因素认证（2FA）。</p>
+</li>
+<li>添加新用户（支持本地账号或集成OIDC提供商如Google/Azure AD）。</li>
+</ol>
+<h4 id="_3"><strong>自定义配置（可选）</strong></h4>
+<ul>
+<li><strong>禁用单账户模式</strong>：编辑<code>docker-compose.yml</code>，在<code>management</code>服务中添加<code>--disable-single-account-mode</code>参数。</li>
+<li><strong>反向代理</strong>：若需与Nginx Proxy Manager集成，修改<code>docker-compose.yml</code>中的端口映射（如将Dashboard端口从443改为8011）。</li>
+</ul>
+<hr />
+<h3 id="_4"><strong>三、客户端接入</strong></h3>
+<h4 id="_5"><strong>安装客户端</strong></h4>
+<ul>
+<li><strong>Linux/macOS</strong>：</li>
+</ul>
+<pre><code class="language-Bash">curl -fsSL https://pkgs.netbird.io/install.sh | sh
+sudo netbird up --setup-key=&lt;管理控制台生成的Setup Key&gt;
+</code></pre>
+<ul>
+<li><strong>Windows</strong>：</li>
+<li>下载安装包：访问<code>https://pkgs.netbird.io/windows</code>，安装后输入Setup Key。</li>
+<li><strong>移动端</strong>：</li>
+<li>Android/iOS应用商店搜索“NetBird”，扫码管理控制台的二维码加入网络。</li>
+</ul>
+<h4 id="_6"><strong>验证连接</strong></h4>
+<pre><code class="language-Bash">netbird status --detail  # 查看设备状态、分配的IP（如100.64.0.2）
+ping 100.64.0.3         # 测试与其他客户端的连通性
+</code></pre>
+<hr />
+<h3 id="_7"><strong>四、网络实验环境配置</strong></h3>
+<h4 id="1"><strong>1. 访问控制策略</strong></h4>
+<ul>
+<li>
+<p><strong>创建策略组</strong>：按部门/项目分组（如<code>dev-group</code>、<code>prod-group</code>）。</p>
+</li>
+<li>
+<p><strong>配置规则</strong>：</p>
+</li>
+<li>
+<p>允许<code>dev-group</code>访问测试服务器IP（如<code>100.64.1.0/24</code>）。</p>
+</li>
+<li>禁止非工作时间访问生产环境。</li>
+</ul>
+<h4 id="2-sd-wan"><strong>2. 站点间互联（SD-WAN）</strong></h4>
+<ul>
+<li><strong>路由配置</strong>：</li>
+<li>在管理控制台的 <strong>Network Routes</strong> 中添加静态路由（如<code>192.168.1.0/24</code> → 目标Peer IP）。</li>
+<li><strong>防火墙设置</strong>：</li>
+</ul>
+<pre><code class="language-Bash"># 启用IP伪装（Masquerade）确保跨网段通信
+firewall-cmd --add-masquerade --permanent
+firewall-cmd --reload
+</code></pre>
+<h4 id="3"><strong>3. 中继模式优化</strong></h4>
+<ul>
+<li><strong>严格NAT环境</strong>：在客户端设置中启用 <strong>Relay Mode</strong>，强制流量经TURN服务器中转。</li>
+<li><strong>自建中继节点</strong>：在多地部署NetBird Relay服务，提升跨区域速度。</li>
+</ul>
+<hr />
+<h3 id="_8"><strong>五、维护与监控</strong></h3>
+<ol>
+<li>
+<p><strong>备份数据</strong></p>
+</li>
+<li>
+<p>配置文件：复制安装目录下的<code>docker-compose.yml</code>、<code>management.json</code>等文件。</p>
+</li>
+<li>
+<p>数据库：备份Zitadel（PostgreSQL）和管理服务（CockroachDB）数据。</p>
+</li>
+<li>
+<p><strong>升级版本</strong></p>
+</li>
+</ol>
+<pre><code class="language-Bash">cd /netbird-install-dir
+docker-compose pull  # 拉取新镜像
+docker-compose up -d  # 重启服务
+</code></pre>
+<pre><code>**注意**：需先检查[https://github.com/netbirdio/netbird/releases是否含破坏性变更。](https://github.com/netbirdio/netbird/releases是否含破坏性变更。)  
+</code></pre>
+<ol>
+<li>
+<p><strong>故障排查</strong></p>
+</li>
+<li>
+<p>查看日志：<code>docker-compose logs -f signal</code>（信令服务）或<code>management</code>（管理服务）。</p>
+</li>
+<li>监控仪表盘：实时查看设备状态、流量拓扑、连接延迟。</li>
+</ol>
+<hr />
+<h3 id="_9"><strong>六、高级功能扩展</strong></h3>
+<ul>
+<li><strong>Kubernetes集成</strong>：通过<a href="https://github.com/netbirdio/kubernetes-operator%E7%AE%A1%E7%90%86%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E3%80%82">https://github.com/netbirdio/kubernetes-operator管理容器网络。</a></li>
+<li><strong>量子安全加密</strong>：启用Rosenpass协议（Post-Quantum VPN）。</li>
+<li><strong>API自动化</strong>：调用管理服务的REST API实现策略批量配置。</li>
+</ul>
+<hr />
+<h3 id="_10"><strong>总结</strong></h3>
+<p>此方案可在<strong>15分钟内</strong>完成NetBird私有网络部署，具备以下优势：</p>
+<p>✅ <strong>零配置组网</strong>：自动NAT穿透，无需手动开放端口或配置路由。</p>
+<p>✅ <strong>企业级安全</strong>：端到端WireGuard加密 + SSO/MFA集成。</p>
+<p>✅ <strong>跨平台支持</strong>：全设备（包括OpenWRT路由器）无缝接入。</p>
+<p>✅ <strong>成本优化</strong>：自托管避免云服务费用，资源占用低于传统VPN。</p>
+<p>遇到问题可查阅<a href="https://docs.netbird.io/%E6%88%96%E5%8A%A0%E5%85%A5https://join.slack.com/t/netbirdio/shared_invite/zt-31rofwmxc-27akKd0Le0vyRpBcwXkP0g%E8%8E%B7%E5%8F%96%E6%94%AF%E6%8C%81%E3%80%82">https://docs.netbird.io/或加入https://join.slack.com/t/netbirdio/shared_invite/zt-31rofwmxc-27akKd0Le0vyRpBcwXkP0g获取支持。</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

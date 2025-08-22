@@ -1,0 +1,2482 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../uv/">
+      
+      
+        <link rel="next" href="../../frontend/alpine-js/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Winscan一键Windows应急响应检测脚本 - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#winscanwindows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Winscan一键Windows应急响应检测脚本
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiagent/7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homelab/Qwen3-Coder/" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/first-mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiagent/sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/Qwen3-Coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/traefik-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/netbird/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="winscanwindows">Winscan一键Windows应急响应检测脚本</h1>
+<pre><code class="language-Batch">@echo off
+color 0f
+::call:colorys调用底部:colorys
+::02为颜色设置，0指定输出文字背景颜色，2指定文字颜色
+::输出不能包含符号 / : ? * &quot; &gt; &lt; | \
+cd %~dp0
+for /f &quot;delims=&quot; %%A in ('dir /s /b %WINDIR%\system32\*htable.xsl') do set &quot;var=%%A&quot;
+if not exist ./eventlog/ (md eventlog)
+if not exist ./schtasks/ (md schtasks)
+if not exist ./Prefetch/ (md Prefetch)
+if not exist ./hive/ (md hive)
+if not exist ./CryptnetURLCache/ (md CryptnetURLCache)
+if exist out.html (del out.html)
+::reg query HKLM\SAM\SAM\Domains\Account\Users\Names
+call:colorys 0A &quot;[+] 正在查询系统相关信息：&quot;
+@echo.
+wmic OS get Caption,CSDVersion,OSArchitecture,Version
+wmic computersystem list brief
+call:colorys 0A &quot;[+] 正在查询系统补丁情况，并写入文件：&quot;
+wmic qfe get Description,HotFixID,InstalledOn /format:&quot;%var%&quot; &gt;&gt; out.html
+@echo.
+call:colorys 0A &quot;[+] 正在查询系统账户和用户组，并写入文件：&quot;
+@echo.
+wmic UserAccount get name,description,sid,disabled
+wmic UserAccount get Description,Disabled,LocalAccount,Lockout,Name,PasswordChangeable,PasswordExpires,PasswordRequired,SID,Status /format:&quot;%var%&quot; &gt;&gt; out.html
+wmic group get Description,Domain,Name,SID,Status /format:&quot;%var%&quot; &gt;&gt; out.html
+wmic volume get Label,DeviceID,DriveLetter,FileSystem,FreeSpace /format:&quot;%var%&quot; &gt;&gt; out.html
+call:colorys 0A &quot;[+] 正在检查域密码策略：&quot;
+@echo.
+Net accounts /domain
+@echo.
+call:colorys 0A &quot;[+] 检查管理员组：&quot;
+@echo.
+net localgroup administrators
+net group &quot;domain admins&quot; /domain
+@echo.
+call:colorys 0A &quot;[+] 检查用户上次登录时间：&quot;
+@echo.
+wmic netlogin get name,lastlogon,badpasswordcount
+call:colorys 0A &quot;[+] 检查重要的注册表项：&quot;
+@echo.
+::SSP
+reg query hklm\system\currentcontrolset\control\lsa /v &quot;Security Packages&quot;
+::WDigest，1代表开启，0代表明文密码不会出现在内存中
+reg query HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential
+@echo.
+call:colorys 0A &quot;[+] 检查RDP保存的凭证：&quot;
+@echo.
+reg query &quot;HKCU\Software\Microsoft\Terminal Server Client\Servers&quot; /s
+reg query &quot;HKCU\Software\Microsoft\Terminal Server Client\Servers&quot; /s &gt; rdp_certificate.txt
+call:colorys 0A &quot;[+] 检查是否开启远程桌面服务：&quot;
+::开启则返回0x00
+reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections
+call:colorys 0A &quot;[+] 检查本机共享列表，并写入文件：&quot;
+net share
+Wmic share get name,path,status /format:&quot;%var%&quot; &gt;&gt; out.html
+call:colorys 0A &quot;[+] 检查系统启动信息，并写入文件：&quot;
+@echo.
+wmic startup get command,caption,Location,User
+wmic startup get command,caption,Location,User /format:&quot;%var%&quot; &gt;&gt; out.html
+@echo.
+call:colorys 0A &quot;[+] 检查已安装反病毒软件：&quot;
+@echo.
+wmic /namespace:\\root\securitycenter2 path antivirusproduct GET displayName,productState, pathToSignedProductExe
+@echo.
+call:colorys 0A &quot;[+] 检查防火墙配置，并写入文件：&quot;
+netsh firewall show config
+netsh firewall show config &gt; firewall_config.txt
+@echo.
+call:colorys 0A &quot;[+] 检查Defender检测到的活动和过去的恶意软件威胁：&quot;
+@echo.
+powershell Get-MpThreatDetection
+call:colorys 0A &quot;[+] 正在拷贝防火墙日志和evtx：&quot;
+@echo.
+if exist %windir%\system32\logfiles\firewall\pfirewall.log (copy /Y %windir%\system32\logfiles\firewall\pfirewall.log)
+copy /Y &quot;C:\Windows\System32\winevt\Logs\Microsoft-Windows-Windows Defender%%4Operational.evtx&quot; .\eventlog\
+@echo.
+call:colorys 0A &quot;[+] 检查已安装软件，并写入文件：&quot;
+@echo.
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall /s /v DisplayName | findstr DisplayName
+wmic PRODUCT get Description,InstallDate,InstallLocation,Vendor,Version /format:&quot;%var%&quot; &gt;&gt; out.html
+@echo.
+call:colorys 0A &quot;[+] 检查计划任务，拷贝日志和计划任务文件&quot;
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree&quot;
+schtasks /query /fo LIST /v &gt; .\schtasks\schtasks.txt
+for %%i in (C:\Windows\System32\Tasks\*) do copy /Y %%i schtasks\
+::for %%i in (C:\Windows\System32\winevt\Logs\Microsoft-Windows-TaskSche*) do copy /Y %%i schtasks\
+copy /Y C:\Windows\System32\winevt\Logs\Microsoft-Windows-TaskScheduler%%4Operational.evtx .\eventlog\
+copy /Y C:\Windows\System32\winevt\Logs\Microsoft-Windows-SMBServer%%4Security.evtx .\eventlog\
+@echo.
+call:colorys 0A &quot;[+] 检查服务状态，并写入文件：&quot;
+powershell Get-Service
+powershell $aa=&quot;gwmi win32_service | ft -Property  Name, DisplayName, PathName, User, State &gt; service.txt&quot;;$aa
+wmic service get Caption,Name,PathName,ServiceType,Started,StartMode,StartName /format:&quot;%var%&quot; &gt;&gt; out.html
+call:colorys 0A &quot;[+] 检查自启动服务：&quot;
+@echo.
+::RunSrvicese:win7、win10、2012
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\RunServices
+reg query HKCU\SOFTWARE\Microsoft\Windows\Currention\RunOnce
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceVers
+@echo.
+call:colorys 0A &quot;[+] 检查自启动目录：&quot;
+@echo.
+dir /a &quot;%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup&quot;
+dir /a &quot;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp&quot;
+dir /a &quot;%SystemDrive%\Documents and Settings\All Users\Start Menu\Programs\Startup&quot;
+@echo.
+call:colorys 0A &quot;[+] 检查注册表启动项，写入文件中：&quot;
+@echo.
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\run &gt;qidong.txt
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce &gt;&gt;qidong.txt
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run &gt;&gt;qidong.txt
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce &gt;&gt;qidong.txt
+reg query HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run &gt;&gt;qidong.txt
+reg query HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce &gt;&gt;qidong.txt
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\run &gt;&gt;qidong.txt
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\run &gt;&gt;qidong.txt
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartMenu &gt;&gt;qidong.txt
+reg query &quot;HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows&quot; /v Load &gt;&gt;qidong.txt
+@echo.
+call:colorys 0A &quot;[+] 检查网络连接（ipc$ 命名管道连接），并写入文件：&quot;
+@echo.
+net use
+wmic netuse get ConnectionState,Description,DisplayType,LocalName,Name,Persistent,RemoteName,ResourceType,Status,UserName /format:&quot;%var%&quot; &gt;&gt; out.html
+call:colorys 0A &quot;[+] 检查是否启用Windows剪切板历史记录：(0x1代表启用，适用Win10）：&quot;
+@echo.
+reg query HKEY_CURRENT_USER\Software\Microsoft\Clipboard /v EnableClipboardHistory
+@echo.
+call:colorys 0A &quot;[+] 检查用户登录初始化、管理员自动登录：&quot;
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&quot; /v Userinit
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&quot; /v AutoAdminLogon
+call:colorys 0A &quot;[+] 检查Logon Scripts:&quot;
+reg query HKCU\Environment /v UserInitMprLogonScript
+@echo.
+call:colorys 0A &quot;[+] 检查屏幕保护程序：&quot;
+reg query &quot;HKCU\Control Panel\Desktop&quot; /v SCRNSAVE.EXE
+@echo.
+call:colorys 0A &quot;[+] 检查AppInit_DLLs：&quot;
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows&quot; /v AppInit_DLLs
+reg query &quot;HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Windows&quot; /v AppInit_DLLs
+call:colorys 0A &quot;[+] 检查COM劫持，并写入文件：&quot;
+::通过修改注册表键值，使特定的clsid指向恶意的dll，程序运行时就会加载恶意的dll
+reg query HKCU\Software\Classes\CLSID /s /t REG_SZ &gt; 32os_32pe_and_64os_64pe.txt
+reg query HKCU\Software\Classes\Wow6432Node\CLSID /s /t REG_SZ &gt; x86OS_x64pe.txt
+@echo.
+call:colorys 0A &quot;[+] 检查shim数据库是否被劫持：&quot;
+@echo.
+::主要解决应用兼容性问题的解决方法，执行被劫持的程序时自动加载数据库中恶意模块（dll，shellcode等）
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Custom&quot;
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\InstalledSDB&quot; /s
+dir /a /b C:\Windows\AppPatch\Custom
+dir /a /b C:\Windows\AppPatch\Custom\Custom64
+@echo.
+call:colorys 0A &quot;[+] 检查进程注入：&quot;
+@echo.
+reg query &quot;HKLM\System\CurrentControlSet\Control\Session Manager\AppCertDlls&quot;
+@echo.
+call:colorys 0A &quot;[+] 检查exe文件启动相关注册表：&quot;
+reg query HKLM\software\classes\exefile\shell\open\command
+call:colorys 0A &quot;[+] 检查Lsa，用于hash传递攻击：&quot;
+reg query HKLM\System\CurrentControlSet\Control\Lsa /v DisableRestrictedAdmin
+call:colorys 0A &quot;[+] 检查映像劫持：&quot;
+rem 适用于windows 2008/win7
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options&quot; -s -f &quot;.exe&quot; -v Debugger
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options&quot; /s /f &quot;.exe&quot; /v GlobalFlag
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit&quot;
+@echo.
+call:colorys 0A &quot;[+] 查询接受最终用户许可协议的程序：&quot;
+reg query HKCU\Software\SysInternals
+@echo.
+call:colorys 0A &quot;[+] 查询安全模式启动相关注册表：&quot;
+@echo.
+reg query HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot /v AlternateShell
+call:colorys 0A &quot;[+] 查询powershell命令记录，拷贝中：&quot;
+@echo.
+::适用于powershell高版本
+if exist %appdata%\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt type %appdata%\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+copy /Y C:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell%%4Operational.evtx .\eventlog\
+@echo.
+call:colorys 0A &quot;[+] 检查IE浏览器记录：&quot;
+reg query &quot;HKCU\SOFTWARE\Microsoft\Internet Explorer\TypedURLs&quot;
+call:colorys 0A &quot;[+] 检查CryptnetURLCache，查看certutil下载记录：&quot;
+::利用工具：CryptnetURLCacheParser
+@echo.
+if exist C:\Windows\System32\config\systemprofile\AppData\LocalLow\Microsoft\CryptnetUrlCache (xcopy /s /q /h /o /y C:\Windows\System32\config\systemprofile\AppData\LocalLow\Microsoft\CryptnetUrlCache .\CryptnetUrlCache\)
+if exist C:\Windows\SysWOW64\config\systemprofile\AppData\LocalLow\Microsoft\CryptnetUrlCache (xcopy /s /q /h /o /y C:\Windows\SysWOW64\config\systemprofile\AppData\LocalLow\Microsoft\CryptnetUrlCache .\CryptnetUrlCache\)
+if exist %USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache (xcopy /s /q /h /o /y %USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache .\CryptnetUrlCache\ )
+@echo.
+call:colorys 0A &quot;[+] 检查最近访问的文件，写入文件中：&quot;
+@echo.
+dir /a %AppData%\Microsoft\Windows\Recent &gt; Recent.txt
+if exist &quot;%SYSTEMROOT%\Documents and Settings\%USERPROFILE%\Recent\&quot; (dir /a %SYSTEMROOT%\Documents and Settings\%USERPROFILE%\Recent\ &gt;&gt;Recent.txt)
+dir /a %USERPROFILE%\AppData\Roaming\Microsoft\Office\Recent\ &gt;&gt;Recent.txt
+@echo.
+call:colorys 0A &quot;[+] 检查&quot;我的电脑、此电脑、计算机&quot;的任意文件夹地址栏内的历史记录：&quot;
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+call:colorys 0A &quot;[+] 检查【运行】的历史记录：&quot;
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+call:colorys 0A &quot;[+] 检查网络连接情况，并写入文件：&quot;
+@echo.
+netstat -anob | findstr ESTABLISHED
+::适用于Win10，Win7不适用
+powershell $aa=&quot;Get-NetTCPConnection | select LocalAddress,localport,remoteaddress,remoteport,state,@{name=\&quot;process\&quot;;Expression={(get-process -id $_.OwningProcess).ProcessName}}, @{Name=\&quot;cmdline\&quot;;Expression={(Get-WmiObject Win32_Process -filter \&quot;ProcessId = $($_.OwningProcess)\&quot;).commandline}} |  sort Remoteaddress -Descending | ft -wrap -autosize &gt; network_tcp.txt&quot;;$aa
+@echo.
+call:colorys 0A &quot;[+] 检查DNS缓存记录，并写入文件中：&quot;
+::适用win10，win7不适用
+@echo.
+powershell $aa=&quot;Get-DnsClientCache |ft -wrap -autosize&quot;;$aa
+ipconfig /displaydns &gt; dns_cache.txt
+call:colorys 0A &quot;[+] 检查进程，写入文件中：&quot;
+wmic process get name,ParentProcessId,processid,executablepath,CreationDate,commandline /format:&quot;%var%&quot; &gt;&gt; out.html
+wmic process get name,parentprocessid,processid,executablepath,CreationDate,commandline /format:csv &gt; process.csv
+powershell $aa=&quot;gwmi win32_process | Select Name, ProcessID, @{n='Owner';e={$_.GetOwner().User}},CommandLine | ft -wrap -autosize &gt; process_ps.txt&quot;;$aa
+@echo.
+call:colorys 0A &quot;[+] 调查取证——导出SAM、SECURITY、SYSTEM（记录系统运行的可执行文件的完整路径和最后的执行日期）：&quot;
+::可用Registry Explorer对SYSTEM文件进行分析，AppCompatCache记录程序的修改时间，一定程度上可以确定程序的最迟运行时间
+@echo.
+reg save hklm\system .\hive\SYSTEM /Y
+reg save hklm\sam .\hive\SAM /Y
+reg save hklm\security .\hive\SECURITY /Y
+call:colorys 0A &quot;[+] 调查取证——收集 Sysmon 日志：&quot;
+if exist C:\Windows\System32\winevt\Logs\Microsoft-Windows-Sysmon%%4Operational.evtx (copy /Y &quot;C:\Windows\System32\winevt\Logs\Microsoft-Windows-Sysmon%%4Operational.evtx&quot; .\eventlog\)
+call:colorys 0A &quot;[+] 调查取证——检查BAM（记录系统运行的可执行文件的完整路径和最后的执行日期，适用于Win10），写入文件中：&quot;
+@echo.
+reg query &quot;HKLM\SYSTEM\CurrentControlSet\Services\bam\state\UserSettings&quot; /s &gt; BAM.txt
+call:colorys 0A &quot;[+] 调查取证——SRUM (System Resource Usage Monitor)，拷贝中：&quot;
+if exist C:\Windows\System32\sru\SRUDB.dat (copy /Y C:\Windows\System32\sru\SRUDB.dat)
+@echo.
+call:colorys 0A &quot;[+] 调查取证——MUICache (从exe文件的版本资源中提取应用程序名、公司名)，写入文件中：&quot;
+reg query &quot;HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache&quot; &gt; MuiCache.txt
+@echo.
+call:colorys 0A &quot;[+] 调查取证——ShimCache (跟踪文件路径、上次修改时间和是否被执行)，注册表导出中：&quot;
+@echo.
+reg export &quot;HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache&quot; ShimCache.reg /Y
+call:colorys 0A &quot;[+] 调查取证——Prefetch (会保存文件第一次和最后一次运行日期、路径和执行次数等信息)，拷贝中&quot;
+@echo.
+::for %%i in (C:\Windows\Prefetch\*) do copy /Y %%i Prefetch\
+xcopy /s /q /h /o /y C:\Windows\Prefetch .\Prefetch\
+call:colorys 0A &quot;[+] 检查系统日志是否有开启：&quot;
+reg query HKLM\SYSTEM\CurrentControlSet\services\eventlog
+call:colorys 0A &quot;[+] 正在导出系统日志：&quot;
+if exist .\eventlog\system.evtx (del .\eventlog\system.evtx)
+wevtutil epl System .\eventlog\system.evtx
+if exist .\eventlog\Application.evtx (del .\eventlog\Application.evtx)
+wevtutil epl Application .\eventlog\Application.evtx
+if exist .\eventlog\Security.evtx (del .\eventlog\Security.evtx)
+wevtutil epl Security .\eventlog\Security.evtx
+rem 远程桌面日志，筛选1149
+if exist .\eventlog\TerminalServices.evtx (del .\eventlog\TerminalServices.evtx)
+wevtutil epl Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational .\eventlog\TerminalServices.evtx
+@echo.
+pause
+::把以下代码放到批处理底部用call调用
+:colorys
+pushd %tmp%&amp;echo CCAICCAI&gt;%2-&amp;certutil /f /decode %2- %2- 1&gt;nul 2&gt;nul
+findstr /a:%1 . %2- \ 2&gt;nul&amp;del /q /f %2- 1&gt;nul 2&gt;nul&amp;popd&amp;exit /b
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

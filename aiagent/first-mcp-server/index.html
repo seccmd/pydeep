@@ -1,0 +1,2702 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../awesome-mcp-servers/">
+      
+      
+        <link rel="next" href="../langchain/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>开发第一个MCP Server - TLD 逻辑组件</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mcp-server" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TLD 逻辑组件" class="md-header__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TLD 逻辑组件
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              开发第一个MCP Server
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_sidebar/" class="md-tabs__link">
+        
+  
+  
+    
+  
+   sidebar
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../7-mcp-tools/" class="md-tabs__link">
+          
+  
+  
+  Aiagent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/docker-image/" class="md-tabs__link">
+          
+  
+  
+  Backend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../frontend/alpine-js/" class="md-tabs__link">
+          
+  
+  
+  Frontend
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homelab/Qwen3-Coder/" class="md-tabs__link">
+          
+  
+  
+  Homelab
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../innervoice/altman/" class="md-tabs__link">
+          
+  
+  
+  Innervoice
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/frp/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prod/" class="md-tabs__link">
+          
+  
+  
+  Prod
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../zh-cn/gost/" class="md-tabs__link">
+          
+  
+  
+  Zh cn
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TLD 逻辑组件" class="md-nav__button md-logo" aria-label="TLD 逻辑组件" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TLD 逻辑组件
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_sidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+     sidebar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aiagent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aiagent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-mcp-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7款MCP，改变 写代码方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent Zero 框架简介
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 收集箱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 网关
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../awesome-mcp-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP资源，awesome！
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    开发第一个MCP Server
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-aimcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 常见AI应用对MCP Server能力的支持情况
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 代码实现MCP Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 代码实现MCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 配置环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mcp-server-hello_mcp_serverpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 新建MCP Server : hello_mcp_server.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 新建MCP Server : hello_mcp_server.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 定义一个server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 定义工具
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-mcp-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 使用 MCP Inspector 进行测试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-clineserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 使用Cline测试Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 使用Cline测试Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-clinemcp-serverclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Cline连接MCP Server的相关Client源码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Langchain All
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcp-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MCP 工具收集
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../news/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI News
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oneapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    One-API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sequentialthinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sequentialthinking 工具使用教程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker-my-code-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 快速编程测试环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/fastapi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastAPI 开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    git 网络代理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/nginx-proxy-manager%E2%80%8B%E2%80%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx Proxy Manager​​ 管理面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Splunk All in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/uv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UV in One
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/winscan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Winscan一键Windows应急响应检测脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Frontend
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/alpine-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alpine.js 入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/from0to1-vite-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Vite项目
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/front0to1-tailwind-css/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从零到一Tailwind现代化前端
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/react-vs-vue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    react和vue 哪个更适合入门新手
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue-basic-learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vue 项目 小白入门实战教学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/vue3-install-tailwindcss-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vue3安装tailwindcss报错
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Homelab
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Homelab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/Qwen3-Coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Qwen3-Coder开源：面向世界的智能编程引擎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    浏览器隐私模式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/click0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0 Click 初始化环境 One-Stop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/docker-vscode-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker 安装 VS Code Web 版
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/git-all/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git all
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home Lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter 环境快速搭建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    项目目录分类管理规范​
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/socks5-all-in-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Socks5 all in one
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/traefik-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traefik 部署文档
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/vps-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    服务器管理工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../homelab/windows-tld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows TLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Innervoice
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Innervoice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/altman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Altman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/cai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蔡老师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/chengyugushi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    做什么都是修行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../innervoice/markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markdown 语法速查表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/frp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale-tailscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实践 Headscale Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/headscale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Headscale 是一款开源自托管的 Tailscale
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/ip-batch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IP批量操作 ip-batch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/netbird/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基于Netbird开源平台独立部署
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCKS5 服务器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prod
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Prod
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment 部署阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8S
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prod/rancher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancher
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Zh cn
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Zh cn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/gost_clash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GOST Clash Tunnel Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zh-cn/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-aimcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 常见AI应用对MCP Server能力的支持情况
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 代码实现MCP Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 代码实现MCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 配置环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mcp-server-hello_mcp_serverpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 新建MCP Server : hello_mcp_server.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 新建MCP Server : hello_mcp_server.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 定义一个server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 定义工具
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-mcp-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 使用 MCP Inspector 进行测试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-clineserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 使用Cline测试Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 使用Cline测试Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-clinemcp-serverclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Cline连接MCP Server的相关Client源码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mcp-server">开发第一个MCP Server</h1>
+<blockquote>
+<p><strong>作者：AI取经路</strong> <a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ%3D%3D\&amp;mid=2649038855\&amp;idx=1\&amp;sn=941028c77cb1632fb52909e76287a6cd"><strong>查看原文</strong></a></p>
+</blockquote>
+<p>本文提供了一个完整的<strong>MCP Server 实现示例</strong>，通过 Python 代码和Cline测试，展示了 MCP 如何用于<strong>增强 AI 应用的能力</strong>，特别是<strong>Tool 能力的集成和调用</strong>。</p>
+<ul>
+<li>
+<ol>
+<li>常见AI应用对MCP Server能力的支持情况</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>代码实现MCP Server</li>
+</ol>
+</li>
+<li>2.1 配置环境</li>
+<li>2.2 新建MCP Server : hello_mcp_server.py</li>
+<li>
+<ol>
+<li>使用Cline测试Server</li>
+</ol>
+</li>
+<li>3.1 Cline连接MCP Server的相关源码</li>
+</ul>
+<p>--领取学习资料大礼包，见文末</p>
+<p>在<a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038667\&amp;idx=1\&amp;sn=d1467904da2f8acc62b7bb4838737ed2\&amp;scene=21#wechat_redirect">《一文说清楚让LangChain大佬“开战”的MCP是什么？》</a>中详细的介绍了MCP.</p>
+<p>MCP为连接<strong>AI应用</strong>与数据源提供了一个通用的开放标准，用单一协议取代了碎片化的集成。通过这个机制， 能力小的<strong>AI应用</strong>会变成更强的应用</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybMKLre9NTvIQYlUw1lc0hVWAcQ8icgboib0BaKWWaPpUPEjFOH7S8Oftw/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>在整个MCP的架构中，我们的<strong>AI应用</strong>（如Cline）作为MCP Hosts，通过内部的MCP Client去接入不同的MCP Server，从而达到增强能力的目的</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybaTB3Zd25QM2UfyN1Wk3u7pPibZWnwR8FjZqRXicNuHMcD6Fm8yNytKFA/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>根据MCP协议，当<strong>AI应用</strong>连接到MCP Server后，能够获取多种能力，比如Tool，Prompts、Resources等</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybUnX88IU5WcdYqLh2rcQnnoPqj8w1IcBfhrTsgiaIPJBpCsYfVFMu6rw/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>详细内容见：<a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038667\&amp;idx=1\&amp;sn=d1467904da2f8acc62b7bb4838737ed2\&amp;scene=21#wechat_redirect">一文说清楚让LangChain大佬“开战”的MCP是什么？</a></p>
+<h2 id="1-aimcp-server">1. 常见AI应用对MCP Server能力的支持情况</h2>
+<p>目前MCP还在发展过程中，我们可以通过官方看到常见<strong>AI应用</strong>目前可以使用的能力情况。</p>
+<p>应用对于Tool能力的使用，目前是最广泛的：</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybYf4ziaNL3zmIdMEqsUTIIjPBWaUhKUKPa5InAdeQ10StsibuskLzZmKQ/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<h2 id="2-mcp-server">2. 代码实现MCP Server</h2>
+<p>我们要实现一个简单的server，他将有一个tool，可以通过订单号查询物流信息。</p>
+<p>这个server在整个架构中的位置，就是下图中绿色的块：</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybDPreWrahvLcoTHrEzmNxHQBvgSUibp7sKy1ncVO4qjvH1Y1IX3vlD6w/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<h3 id="21">2.1 配置环境</h3>
+<p>首先，让我们安装 <code>uv</code> 并设置我们的 Python 项目和环境：</p>
+<p><strong>安装uv工具（windows）</strong></p>
+<pre><code class="language-text">powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;
+</code></pre>
+<p><strong>重新开启一个终端，并确认uv已经安装成功</strong></p>
+<pre><code class="language-text">PS G:\workspace\idea\py\hello-mcp-server&gt; uv version
+uv 0.6.6 (c1a0bb85e 2025-03-12)
+</code></pre>
+<blockquote>
+<p>❝ 在macos/linux环境中安装uv</p>
+</blockquote>
+<pre><code class="language-text">curl -LsSf https://astral.sh/uv/install.sh | sh
+</code></pre>
+<blockquote>
+<p>❝ uv是一个用 Rust 编写的极快的 Python 包和项目管理器。 官网：<a href="https://github.com/astral-sh/uv">https://github.com/astral-sh/uv</a></p>
+</blockquote>
+<p><strong>创建项目，初始化环境：</strong></p>
+<pre><code class="language-text">`# 初始化项目 uv init hello-mcp-server # 创建Python虚拟环境 cd hello-mcp-server uv venv # 激活虚拟环境 .venv\Scripts\activate # 安装依赖 uv add mcp[cli]` 
+</code></pre>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybdRkcicJkPua6OyPLRwb79WcVSibZqCJT0C49DrCHtvo1yfUTACorWd4Q/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<h3 id="22-mcp-server-hello_mcp_serverpy">2.2  新建MCP Server : <code>hello_mcp_server.py</code></h3>
+<p>我们新建一个Server，并增加tool来模拟通过订单号查询物流信息的功能</p>
+<h4 id="221-server">2.2.1 定义一个server</h4>
+<p>导入包并定义mcp实例</p>
+<pre><code class="language-text">&quot;&quot;&quot;
+pip install mcp[cli]
+&quot;&quot;&quot;
+from mcp.server.fastmcp import FastMCP
+from pydantic import Field
+
+# Initialize FastMCP server
+mcp = FastMCP(&quot;hello-mcp-server&quot;, log_level=&quot;ERROR&quot;)
+</code></pre>
+<h4 id="222">2.2.2 定义工具</h4>
+<p>通过<code>@mcp.tool()</code>注解，把一个函数注册为Tool</p>
+<pre><code class="language-text"># 注册工具的装饰器，可以很方便的把一个函数注册为工具
+@mcp.tool()
+asyncdef query_logistics(order_id: str = Field(description=&quot;订单号&quot;)) -&gt; str:
+    &quot;&quot;&quot;查询物流信息。当用户需要根据订单号查询物流信息时，调用此工具
+
+    Args:
+        order_id: 订单号
+
+    Returns:
+        物流信息的字符串描述
+    &quot;&quot;&quot;
+    # 统一的物流信息数据
+    tracking_info = [
+        {&quot;time&quot;: &quot;2024-01-20 10:00:00&quot;, &quot;status&quot;: &quot;包裹已揽收&quot;, &quot;location&quot;: &quot;深圳转运中心&quot;},
+        {&quot;time&quot;: &quot;2024-01-20 15:30:00&quot;, &quot;status&quot;: &quot;运输中&quot;, &quot;location&quot;: &quot;深圳市&quot;},
+        {&quot;time&quot;: &quot;2024-01-21 09:00:00&quot;, &quot;status&quot;: &quot;到达目的地&quot;, &quot;location&quot;: &quot;北京市&quot;},
+        {&quot;time&quot;: &quot;2024-01-21 14:00:00&quot;, &quot;status&quot;: &quot;派送中&quot;, &quot;location&quot;: &quot;北京市朝阳区&quot;},
+        {&quot;time&quot;: &quot;2024-01-21 16:30:00&quot;, &quot;status&quot;: &quot;已签收&quot;, &quot;location&quot;: &quot;北京市朝阳区三里屯&quot;}
+    ]
+
+    # 格式化物流信息
+    result = f&quot;物流单号：{order_id}\n\n物流轨迹：\n&quot;
+    for item in tracking_info:
+        result += f&quot;[{item['time']}] {item['status']} - {item['location']}\n&quot;
+
+    return result
+</code></pre>
+<h4 id="223-mcp-inspector">2.2.3 使用 MCP Inspector 进行测试</h4>
+<p>MCP Inspector 是一个用于测试和调试 MCP 服务器的交互式开发工具。</p>
+<p><a href="https://modelcontextprotocol.io/docs/tools/inspector">https://modelcontextprotocol.io/docs/tools/inspector</a></p>
+<p><strong>启动MCP Inspector：</strong></p>
+<p>执行命令：<code>mcp dev hello_mcp_server.py</code></p>
+<pre><code class="language-text">(hello-mcp-server) PS G:\workspace\idea\py\hello-mcp-server&gt; mcp dev hello_mcp_server.py
+Starting MCP inspector...
+Proxy server listening on port 3000
+
+🔍 MCP Inspector is up and running at http://localhost:5173 🚀
+</code></pre>
+<p>通过浏览器打开<a href="http://localhost:5173">http://localhost:5173</a></p>
+<p><strong>连接MCP Server:</strong></p>
+<p>点击“Connect”启动MCP Server并建立连接</p>
+<p>1.使用标准输入输出作为传输层</p>
+<p>2.使用命令是uv</p>
+<p>3.uv命令的参数</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybCVSGnxEmYrcbUpGQerNPjvicP1rbXdZJK6XHR8DQhjAPl5N40ev0GgQ/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p><strong>查询所有的Tool：</strong></p>
+<p>1.点击“Tools”能力标签</p>
+<p>2.点击“List Tools”，查询server中所有的tool（调用了协议的<code>tools/list</code> 端点）</p>
+<p>3.显示出所有的tool</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybLJVvZxcgMG4iaM6TDZXaTpEByFSFTOdSStlHJJL7IcNdId8xJx246iaQ/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p><strong>执行Tool：</strong></p>
+<p>1.选择需要测试的tool</p>
+<p>2.输入入参：ORDER-123456，点击“Run Tool”（调用了协议的<code>tools/call</code> 端点）</p>
+<p>3.Tool成功返回结果</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybib5fgzBlWxxtTjwDbZRqKnPD1G4TAo4JrHHyTylRnehokfKBrmwC8AQ/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<h2 id="3-clineserver">3. 使用Cline测试Server</h2>
+<p>打开Cline，点击上边的“MCP Server”</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybQ42ugOBC7WCIwrAOq9e7e1uIRe1CGeibKY3icicDtvJHCC5KNspHThq2A/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>选择“Installed”</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybicdYZEsViaibPxIDR14Nt7v4MBKsFxzGQQyfa8ibstnd1kmY6xnu0IDslA/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>点击“Configure MCP Servers”</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybMibxs7r0pw2xX6KpvBCQXhxIibibMHdOk7uYB2Cib11iaFyYoR8sxsNZJjw/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>右边会弹出配置文件</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybMmjEypWIG2d5Lf8MMm8Fyr0rDgctZM2FO1icCyiafsvFqfyPUUEEFFgg/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>将自己刚写的服务器相关配置填进去，保存</p>
+<pre><code class="language-text">&quot;hello-mcp-server&quot;: {
+&quot;name&quot;: &quot;第一个MCP服务&quot;,
+&quot;key&quot;: &quot;hello-mcp-server&quot;,
+&quot;command&quot;: &quot;uv&quot;,       
+&quot;args&quot;: [
+    &quot;--directory&quot;,
+    &quot;G:\\workspace\\idea\\py\\hello-mcp-server\\&quot;,
+    &quot;run&quot;,
+    &quot;--with&quot;,
+    &quot;mcp&quot;,
+    &quot;mcp&quot;,
+    &quot;run&quot;,
+    &quot;hello_mcp_server.py&quot;
+  ],
+&quot;disabled&quot;: false,
+&quot;autoApprove&quot;: []
+}
+</code></pre>
+<p><strong>整个完整命令相当于：</strong></p>
+<pre><code class="language-text">uv --directory G:\workspace\idea\py\hello-mcp-server\ run --with mcp mcp run hello_mcp_server.py
+</code></pre>
+<p>分为3段：</p>
+<ol>
+<li><code>uv --directory G:\workspace\idea\py\hello-mcp-server\</code> 指定工作目录</li>
+<li><code>run --with mcp</code> 运行时必须要有mcp包被安装</li>
+<li><code>mcp run hello_mcp_server.py</code> 使用mcp启动server</li>
+</ol>
+<p>左边会生成对应的服务列表，点击“Done”退出</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybq87x7c4ANPFAQQZo9RwBLnUjGBNhNTt6yQOj0FXX9CR1JyBLSnc6AA/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>在Cline对话框中输入提示词：查一下订单为“ORDER-123456”的物流信息</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybPRibREKgV2CG8AdbMjuee8UypzdK46aBCQrbXv6Xy4L4z5ztJDVm20w/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>Cline开始调用MCP Server，点击“Approve”同意</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vybSzicJic7SxytdicSp7OJwh4hHuTKtEVLYED85yp9GkWJ1slS9FP1R1Jfw/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<p>MCP Server调用成功</p>
+<p><img alt="\&lt;span leaf=&quot;&quot;&gt;\&lt;br&gt;\&lt;/span&gt;" src="https://mmbiz.qpic.cn/mmbiz_png/ko3ibXTD3NELmMxVONY7HGo0kYdPe6vyb7kEsfRyGegYmPV4ymIMcbuhPF5TNcvDx3010SHc9w0qtUP9HV07dxg/640?wx_fmt=png\&amp;from=appmsg" /></p>
+<h3 id="31-clinemcp-serverclient">3.1 Cline连接MCP Server的相关Client源码</h3>
+<p>Cline(相当于MCP架构中的Host)源码中，MCP相关的代码在<code>src/services/mcp/McpHub.ts</code>中，MCP Clinet连接MCP  Server的代码在<code>connectToServer</code>:</p>
+<pre><code class="language-text">private async connectToServer(name: string, config: StdioServerParameters): Promise&lt;void&gt; {
+  ...
+
+try {
+   // 创建新的MCP客户端实例，设置客户端名称和版本信息
+   const client = new Client(
+    {
+     name: &quot;Cline&quot;,
+     version: this.providerRef.deref()?.context.extension?.packageJSON?.version ?? &quot;1.0.0&quot;,
+    },
+    {
+     capabilities: {},        // 客户端没有给服务端暴露能力
+    },
+   )
+
+   // 创建标准输入输出传输实例，配置命令、参数和环境变量
+   // 这个是我们配置文件的内容
+   const transport = new StdioClientTransport({
+    command: config.command,
+    args: config.args,
+    env: {
+     ...config.env,
+     ...(process.env.PATH ? { PATH: process.env.PATH } : {}),
+    },
+    stderr: &quot;pipe&quot;, 
+   })
+
+            ......
+
+   // 启动传输层，建立实际的进程间通信通道
+   await transport.start()
+
+   ...
+
+   // 建立MCP客户端连接
+   // 连接成功后更新服务器状态为已连接，清除错误信息
+   // 初始化并获取服务器提供的工具和资源列表
+   await client.connect(transport)
+   connection.server.status = &quot;connected&quot;
+   connection.server.error = &quot;&quot;
+
+   // 初始化获取工具资源列表
+   connection.server.tools = awaitthis.fetchToolsList(name)
+   connection.server.resources = awaitthis.fetchResourcesList(name)
+   connection.server.resourceTemplates = awaitthis.fetchResourceTemplatesList(name)
+  } catch (error) {
+   ......
+  }
+ }
+</code></pre>
+<p>到目前为止我们实现了一个能提供Tool能力的MCP Server</p>
+<p>往日推荐：</p>
+<ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038516\&amp;idx=1\&amp;sn=172254bf26b3f7ff23f853f480e87a5e\&amp;scene=21#wechat_redirect">从源码看OpenManus：如何用开源技术复刻Manus</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038248\&amp;idx=1\&amp;sn=fb46934ddd6c12b261a4dcd23fb503ab\&amp;scene=21#wechat_redirect">LangChain实战 | 路由机制让AI助手更聪明，专业问题交给专业模块！</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038160\&amp;idx=1\&amp;sn=2c5087f3f823097352483e86a54be59b\&amp;scene=21#wechat_redirect">以前做PPT要3天，现在只要10分钟！DeepSeek+Kimi 让我效率起飞！</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038076\&amp;idx=1\&amp;sn=c876b11f688e1efa065c80fe53b9807d\&amp;scene=21#wechat_redirect">LangChain实战 | MultiQueryRetriever 让 RAG 更懂你的问题</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4MjE1Nzc2MQ==\&amp;mid=2649038009\&amp;idx=1\&amp;sn=ef85b93bec5d908b2b436b316f19a986\&amp;scene=21#wechat_redirect">北京大学发布《DeepSeek提示词工程与落地场景》技术文档，推动国产AI应用创新</a></li>
+</ol>
+<p><img alt="" src="https://mmbiz.qpic.cn/mmbiz_jpg/ko3ibXTD3NELPrDo2pTRDCrjba7NoOSElQlJzumtya910soFutD2XGib3oSicr70TziazoNq96bcEHNud8aJjVYcrw/640?wx_fmt=jpeg\&amp;from=appmsg" /></p>
+<p>有需要的，在公众号「<strong>AI取经路</strong>」发消息「学习资料」即可获取。</p>
+<p><strong>--END--</strong></p>
+<p>点亮 <strong>“赞”</strong>和<strong>“在看”</strong>，**“分享”**好友一起看</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
