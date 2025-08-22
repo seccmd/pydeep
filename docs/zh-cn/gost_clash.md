@@ -146,3 +146,69 @@ gost -L socks5+tls://user:pass@:443?cert=/path/to/cert.pem&key=/path/to/key.pem
 gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 
 ```
+
+### 设置开机自启
+```
+设置gost开机自启
+touch /etc/systemd/system/gost.service #创建service文件
+vi /etc/systemd/system/gost.service #编辑service文件
+内容为
+
+[Unit]
+Description=GOST SERVER
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gost -L=ss://chacha20:passwd@:8338 -F=socks5://ip:7891
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+其中passwd需要修改成你需要的ss的密码，ip是你内网服务器的内网ip。然后保存并退出。
+
+# 重新加载配置文件
+systemctl daemon-reload
+#设置gost开机自启
+systemctl enable gost.service
+# 启动服务
+systemctl start gost.service
+# 重启服务
+systemctl restart gost.service
+## 查看运行状态 ##
+systemctl status gost.service
+## 实时日志 ##
+journalctl -u gost.service -f
+设置Clash开机自启
+touch /etc/systemd/system/clash.service #创建service文件
+vi /etc/systemd/system/clash.service #编辑service文件
+内容为
+
+[Unit]
+Description=clash daemon
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/clash -d /root/.config/clash/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+然后保存并退出。
+
+# 重新加载配置文件
+systemctl daemon-reload
+#设置clash开机自启
+systemctl enable clash.service
+# 启动服务
+systemctl start clash.service
+# 重启服务
+systemctl restart clash.service
+## 查看运行状态 ##
+systemctl status clash.service
+## 实时日志 ##
+journalctl -u clash.service -f
+内网服务器的透明代理
+```
