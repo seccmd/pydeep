@@ -63,7 +63,7 @@ Type=simple
 ExecStart=/usr/bin/gost -L=$LISTEN_URL
 Restart=on-failure
 RestartSec=10s
-User=nobody
+User=root
 LimitNOFILE=65536
 
 [Install]
