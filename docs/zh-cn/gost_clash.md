@@ -1,6 +1,6 @@
 # GOST Clash Tunnel Deploy
 
-## GOST 服务端安装部署
+## 一、GOST 服务端安装部署
 
 ### GOST 服务端 任选其一
 
@@ -10,7 +10,7 @@ GOST v2: https://github.com/ginuerzh/gost/releases
 GOST v3: https://github.com/go-gost/gost/releases
 ```
 
-### GOST 命令配置
+### GOST 测试命令
 
 ```
 # 服务端VPS，开启加密带认证的代理服务
@@ -20,7 +20,7 @@ gost -L socks5+tls://user:pass@:443
 gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 ```
 
-## Clash 客户端安全部署
+## 二、Clash 客户端安全部署
 
 保存下文中配置文件，导入 Clash 客户端
 
@@ -86,9 +86,9 @@ rules:
 
 - https://clash.skk.moe/
 
-## Homelab 生产部署
+## 三、Homelab 生产部署
 
-## 部署设备 GliNet
+### 部署设备 GliNet
 
 ```
 # 开放端口：
@@ -128,7 +128,7 @@ service gost start
 service gost enable
 ```
 
-## Vultr 测试部署
+## 四、Vultr 测试部署
 
 - https://www.vultr.com/
 
