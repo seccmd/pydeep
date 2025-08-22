@@ -10,17 +10,6 @@ SYSTEMD_SERVICE="/etc/systemd/system/${SERVICE_NAME}.service"
 echo "=== GOST One-Click Deployment Script ==="
 echo "Default listen URL: $LISTEN_URL"
 
-# Prompt user for custom listen URL
-read -p "Enter listen address (e.g. socks5+tls://user:pass@:443): " input_listen
-LISTEN_URL=${input_listen:-$LISTEN_URL}
-
-# Confirmation
-echo
-echo "GOST will be started with the following configuration:"
-echo "  Listen Address: $LISTEN_URL"
-read -p "Continue? [Y/n] " -n 1 -r
-echo
-
 if [[ ! $REPLY =~ ^[Yy]$ ]] && [[ ! -z "$REPLY" ]]; then
     echo "Installation canceled."
     exit 1
