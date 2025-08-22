@@ -149,10 +149,11 @@ gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 
 ### 设置开机自启
 ```
-设置gost开机自启
+# 设置gost开机自启
 touch /etc/systemd/system/gost.service #创建service文件
 vi /etc/systemd/system/gost.service #编辑service文件
-内容为
+
+---
 
 [Unit]
 Description=GOST SERVER
@@ -160,13 +161,14 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/gost -L=ss://chacha20:passwd@:8338 -F=socks5://ip:7891
+ExecStart=/usr/bin/gost -L=ss://chacha20:passwd@:8338 -F=socks5://ip:7891 # 其中passwd需要修改成你需要的ss的密码，ip是你内网服务器的内网ip。然后保存并退出。
 Restart=on-failure
 RestartSec=42s
 
 [Install]
 WantedBy=multi-user.target
-其中passwd需要修改成你需要的ss的密码，ip是你内网服务器的内网ip。然后保存并退出。
+
+---
 
 # 重新加载配置文件
 systemctl daemon-reload
@@ -180,10 +182,13 @@ systemctl restart gost.service
 systemctl status gost.service
 ## 实时日志 ##
 journalctl -u gost.service -f
-设置Clash开机自启
+
+
+# 设置Clash开机自启
 touch /etc/systemd/system/clash.service #创建service文件
 vi /etc/systemd/system/clash.service #编辑service文件
-内容为
+
+---
 
 [Unit]
 Description=clash daemon
@@ -196,7 +201,8 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-然后保存并退出。
+
+---
 
 # 重新加载配置文件
 systemctl daemon-reload
