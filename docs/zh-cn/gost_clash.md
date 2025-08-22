@@ -8,6 +8,9 @@ curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/i
 
 # 一键卸载 GOST
 curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/uninstall-gost.sh | bash
+
+# 一键下载配置
+curl https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/conf/us-clash.yaml -o us-clash.yaml
 ```
 
 ## 一、GOST 服务端安装部署
