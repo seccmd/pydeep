@@ -74,12 +74,7 @@ proxy-groups:
     type: select
     proxies:
       - "socks"
-
-# 规则配置（全局转发）
-rules:
-  - DOMAIN-SUFFIX,google.com,PROXY
-  - GEOIP,CN,DIRECT
-  - MATCH,PROXY
+      - DIRECT
 
 # 规则配置（国内不转发）
 rules:
