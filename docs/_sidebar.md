@@ -3,6 +3,7 @@
 - 知识库
 
   - [GOST](zh-cn/gost.md)
+  - [GOST&Clash](zh-cn/gost_clash.md)
   - [小工具集合](zh-cn/tools.md)
 
 - Homelab
