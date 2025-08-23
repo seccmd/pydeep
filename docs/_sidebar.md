@@ -1,9 +1,10 @@
 <!-- markdownlint-disable first-line-h1 -->
 
-- 知识库
+- 目录
 
-  - [GOST](zh-cn/gost.md)
-  - [GOST&Clash](zh-cn/gost_clash.md)
+  - [网络阶段 Network](net/)
+  - [开发阶段 Development](dev/)
+  - [生产阶段 Deployment](prod/)
   - [小工具集合](zh-cn/tools.md)
 
 - Homelab
@@ -20,15 +21,7 @@
   - [Windows 配置本地 TLD 开发环境](homelab/windows-tld.md)
   - [个人项目管理与组织](homelab/projects.md)
   - [HomeLab 基础搭建](homelab/homelab.md)
-
-- 网络
-
-  - [Headscale 配置指南](network/headscale.md)
-  - [Headscale 与 Tailscale 集成](network/headscale-tailscale.md)
-  - [NetBird 网络搭建与使用](network/netbird.md)
-  - [批量 IP 操作与管理](network/ip-batch.md)
-  - [SOCKS5 代理配置与应用](network/socks5.md)
-  - [FRP](network/frp.md)
+  - [FreeFileSync 的 U盘自动备份方案](homelab/freefilesync.md)
 
 - 链接
 

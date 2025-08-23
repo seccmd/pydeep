@@ -15,7 +15,7 @@
 
 ***
 
-### **一、环境准备**
+## **一、环境准备**
 
 1. **服务器要求**
 
@@ -48,9 +48,9 @@ sudo yum install -y jq curl  # CentOS/RHEL
 
 ***
 
-### **二、服务端部署**
+## **二、服务端部署**
 
-#### **步骤1：一键安装NetBird**
+### **步骤1：一键安装NetBird**
 
 ```Bash
 export NETBIRD_DOMAIN=netbird.example.com  # 替换为你的域名
@@ -64,7 +64,7 @@ curl -fsSL https://github.com/netbirdio/netbird/releases/latest/download/getting
   * 部署NetBird管理服务、Signal服务、STUN/TURN服务（Coturn）、Zitadel身份认证服务。
   * 申请Let's Encrypt SSL证书，启用HTTPS加密。
 
-#### **步骤2：访问管理控制台**
+### **步骤2：访问管理控制台**
 
 1. 登录URL：`https://<你的域名>`（如`https://netbird.example.com`）。
 
@@ -73,16 +73,16 @@ curl -fsSL https://github.com/netbirdio/netbird/releases/latest/download/getting
    * 修改默认密码，启用双因素认证（2FA）。
    * 添加新用户（支持本地账号或集成OIDC提供商如Google/Azure AD）。
 
-#### **自定义配置（可选）**
+### **自定义配置（可选）**
 
 * **禁用单账户模式**：编辑`docker-compose.yml`，在`management`服务中添加`--disable-single-account-mode`参数。
 * **反向代理**：若需与Nginx Proxy Manager集成，修改`docker-compose.yml`中的端口映射（如将Dashboard端口从443改为8011）。
 
 ***
 
-### **三、客户端接入**
+## **三、客户端接入**
 
-#### **安装客户端**
+### **安装客户端**
 
 * **Linux/macOS**：
 
@@ -96,7 +96,7 @@ sudo netbird up --setup-key=<管理控制台生成的Setup Key>
 * **移动端**：
   * Android/iOS应用商店搜索“NetBird”，扫码管理控制台的二维码加入网络。
 
-#### **验证连接**
+### **验证连接**
 
 ```Bash
 netbird status --detail  # 查看设备状态、分配的IP（如100.64.0.2）
@@ -105,9 +105,9 @@ ping 100.64.0.3         # 测试与其他客户端的连通性
 
 ***
 
-### **四、网络实验环境配置**
+## **四、网络实验环境配置**
 
-#### **1. 访问控制策略**
+### **1. 访问控制策略**
 
 * **创建策略组**：按部门/项目分组（如`dev-group`、`prod-group`）。
 
@@ -116,7 +116,7 @@ ping 100.64.0.3         # 测试与其他客户端的连通性
   * 允许`dev-group`访问测试服务器IP（如`100.64.1.0/24`）。
   * 禁止非工作时间访问生产环境。
 
-#### **2. 站点间互联（SD-WAN）**
+### **2. 站点间互联（SD-WAN）**
 
 * **路由配置**：
   * 在管理控制台的 **Network Routes** 中添加静态路由（如`192.168.1.0/24` → 目标Peer IP）。
@@ -128,14 +128,14 @@ firewall-cmd --add-masquerade --permanent
 firewall-cmd --reload
 ```
 
-#### **3. 中继模式优化**
+### **3. 中继模式优化**
 
 * **严格NAT环境**：在客户端设置中启用 **Relay Mode**，强制流量经TURN服务器中转。
 * **自建中继节点**：在多地部署NetBird Relay服务，提升跨区域速度。
 
 ***
 
-### **五、维护与监控**
+## **五、维护与监控**
 
 1. **备份数据**
 
@@ -161,7 +161,7 @@ docker-compose up -d  # 重启服务
 
 ***
 
-### **六、高级功能扩展**
+## **六、高级功能扩展**
 
 * **Kubernetes集成**：通过[https://github.com/netbirdio/kubernetes-operator管理容器网络。](https://github.com/netbirdio/kubernetes-operator%E7%AE%A1%E7%90%86%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E3%80%82)
 * **量子安全加密**：启用Rosenpass协议（Post-Quantum VPN）。
@@ -169,7 +169,7 @@ docker-compose up -d  # 重启服务
 
 ***
 
-### **总结**
+## **总结**
 
 此方案可在**15分钟内**完成NetBird私有网络部署，具备以下优势：
 
