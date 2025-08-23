@@ -3,7 +3,7 @@
 ### One - [install0.sh](http://install0.sh)
 
 ```Bash
-curl -LsSf https://raw.githubusercontent.com/seccmd/one/refs/heads/main/install0.sh | bash -s -- all
+curl -LsSf https:/www.seccmd.net/tld/script/install0.sh | bash -s -- all
 ```
 
 ```Bash

@@ -5,6 +5,7 @@
   - [网络阶段 Network](net/)
   - [开发阶段 Development](dev/)
   - [生产阶段 Deployment](prod/)
+  - [AI 编程](ailab/aicode.md)
   - [小工具集合](zh-cn/tools.md)
 
 - Homelab

@@ -4,13 +4,13 @@
 
 ```
 # 一键安装 GOST
-curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/install-gost.sh | bash
+curl -fsSL https:/www.seccmd.net/tld/script/install-gost.sh | bash
 
 # 一键卸载 GOST
-curl -fsSL https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/script/uninstall-gost.sh | bash
+curl -fsSL https:/www.seccmd.net/tld/script/uninstall-gost.sh | bash
 
 # 一键下载配置
-curl https://raw.githubusercontent.com/seccmd/tld/refs/heads/main/conf/us-clash.yaml -o us-clash.yaml
+curl https:/www.seccmd.net/tld/conf/us-clash.yaml -o us-clash.yaml
 ```
 
 ## 一、GOST 服务端安装部署
