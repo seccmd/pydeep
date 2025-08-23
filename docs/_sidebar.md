@@ -22,6 +22,7 @@
   - [Windows 配置本地 TLD 开发环境](homelab/windows-tld.md)
   - [个人项目管理与组织](homelab/projects.md)
   - [HomeLab 基础搭建](homelab/homelab.md)
+  - [HomeLab Docker搭建](homelab/homelab-docker.md)
   - [FreeFileSync 的 U盘自动备份方案](homelab/freefilesync.md)
 
 - 链接
