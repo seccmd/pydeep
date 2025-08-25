@@ -2,7 +2,7 @@
 
 ## 一键部署脚本
 
-```
+```bash
 # 一键安装 GOST
 curl -fsSL https:/www.seccmd.net/tld/script/install-gost.sh | bash
 
@@ -17,7 +17,7 @@ curl https:/www.seccmd.net/tld/conf/us-clash.yaml -o us-clash.yaml
 
 ### GOST 服务端 任选其一
 
-```
+```bash
 下载地址：
 GOST v2: https://github.com/ginuerzh/gost/releases
 GOST v3: https://github.com/go-gost/gost/releases
@@ -25,7 +25,7 @@ GOST v3: https://github.com/go-gost/gost/releases
 
 ### GOST 测试命令
 
-```
+```bash
 # 服务端VPS，开启加密带认证的代理服务
 gost -L socks5+tls://user:pass@:443
 
@@ -39,7 +39,7 @@ gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 
 ### Clash 客户端 任选其一
 
-```
+```markdown
 # Clash Verge Rev
 Clash Verge Rev下载地址：https://github.com/clash-verge-rev/clash-verge-rev/releases
 Clash Verge Rev使用教程：https://clashvergerev.org/
@@ -98,7 +98,7 @@ rules:
 
 ### 部署设备 GliNet
 
-```
+```bash
 # 开放端口：
 1080 - frp  - us vps socks5
 1081 - gost - cn socks5+tls
@@ -140,7 +140,7 @@ service gost enable
 
 - https://www.vultr.com/
 
-```
+```bash
 # 如果你没有现成的证书，可以使用自签名证书（仅测试用）：
 
 openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -subj "/CN=example.com"
@@ -156,7 +156,7 @@ gost -L socks5://:1080 -F socks5+tls://user:pass@server_ip_or_domain:443
 ```
 
 ### 设置开机自启
-```
+```bash
 # 设置gost开机自启
 touch /etc/systemd/system/gost.service #创建service文件
 vi /etc/systemd/system/gost.service #编辑service文件
