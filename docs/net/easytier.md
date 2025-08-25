@@ -6,7 +6,7 @@
 
 ```bash
 # 服务端-启动命令
-/mnt/mmcblk0p1/EasyTier/easytier-linux-mipsel/easytier-core  --ipv4 10.145.145.1 --private-mode true --network-name my-network --network-secret my-secret
+easytier-core --ipv4 10.145.145.1 --private-mode true --network-name my-network --network-secret my-secret
 ```
 
 ## 客户端联网操作
