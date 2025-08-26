@@ -115,7 +115,7 @@ Remove k3s:
 
 ---
 
-# ✅ Practice Checklist
+## ✅ Practice Checklist
 
 * [ ] Install k3s server
 * [ ] Verify cluster (`kubectl get nodes`)
@@ -132,7 +132,7 @@ Here’s a **practice note for a simple Ingress demo in k3s**:
 
 ---
 
-## 📝 Practising Ingress in k3s
+# 📝 Practising Ingress in k3s
 
 ## 1. Background
 
@@ -247,7 +247,7 @@ kubectl delete deployment app1 app2
 
 ---
 
-# ✅ Ingress Practice Checklist
+## ✅ Ingress Practice Checklist
 
 * [ ] Deploy two apps (nginx + httpd)
 * [ ] Create services for them
@@ -261,7 +261,7 @@ Sure! Here's a **clear, practical UFW example** for a small k3s cluster with **1
 
 ---
 
-## 🛡️ UFW Rules for k3s Cluster
+# 🛡️ UFW Rules for k3s Cluster
 
 ### 1. **Server Node (control-plane + ingress)**
 
