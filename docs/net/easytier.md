@@ -38,4 +38,8 @@ UDP  11010 (UDP)
 WebSocket  11011 (TCP)
 WebSocket SSL  11012 (TCP)
 WireGuard  11013 (UDP)
+
+# 私有网络 开放1080
+gost -L socks5://:1080 -I tun0 &
+sudo ufw allow from 10.145.145.0/24 to any port 1080
 ```
