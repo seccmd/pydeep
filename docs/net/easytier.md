@@ -2,6 +2,20 @@
 
 - https://easytier.cn/
 
+## Linux 客户端 一键自动部署
+
+```bash
+# linux install easytier
+# InstDir: /opt/EasyTier/easytier-linux-x86_64
+curl -sfL http://seccmd.net/tld/script/install-easytier.sh | sh -
+
+# linux service easytier
+# Configfile: /etc/systemd/system/easytier.service
+curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | \
+ NAME=easytier \
+ EXEC_CMD="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret" sh -
+```
+
 ## 自建服务端操作
 
 ```bash
