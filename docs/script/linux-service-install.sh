@@ -1,24 +1,27 @@
 #!/bin/sh
+# Usage: NAME=myservice EXEC_CMD="run -a 1 -b 2" sh my-service-install.sh
+# curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | \
+# NAME=myservice \
+# EXEC_CMD="run -a 1 -b 2" sh -
 
-# Use injected env variables or defaults
 SERVICE_NAME="${NAME:-myservice}"
-EXEC_CMD="${EXECSTART:-/bin/true}"
+COMMAND="${EXEC_CMD:-/bin/true}"
 
-# Write systemd service file
 cat <<EOF > /etc/systemd/system/$SERVICE_NAME.service
 [Unit]
 Description=$SERVICE_NAME
 After=network.target
 
 [Service]
-ExecStart=$EXEC_CMD
+ExecStart=/bin/sh -c "$COMMAND"
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-# Reload systemd and enable/start the service
 systemctl daemon-reload
-systemctl enable $SERVICE_NAME
-systemctl start $SERVICE_NAME
+systemctl enable "$SERVICE_NAME"
+systemctl start "$SERVICE_NAME"
+
+echo "$SERVICE_NAME installed and started!"
