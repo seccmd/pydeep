@@ -261,7 +261,7 @@ Sure! Here's a **clear, practical UFW example** for a small k3s cluster with **1
 
 ---
 
-# 🛡️ UFW Rules for k3s Cluster
+## 🛡️ UFW Rules for k3s Cluster
 
 ### 1. **Server Node (control-plane + ingress)**
 
