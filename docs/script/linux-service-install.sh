@@ -1,27 +1,48 @@
 #!/bin/sh
-# Usage: NAME=myservice EXEC_CMD="run -a 1 -b 2" sh my-service-install.sh
-# curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | \
-# NAME=myservice \
-# EXEC_CMD="run -a 1 -b 2" sh -
+#
+# Generic Linux systemd service installer
+# Usage:
+#   export SERVICE_NAME=easytier
+#   export SERVICE_EXEC="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010"
+#   curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | sh -
+#
 
-SERVICE_NAME="${NAME:-myservice}"
-COMMAND="${EXEC_CMD:-/bin/true}"
+set -e
 
-cat <<EOF > /etc/systemd/system/$SERVICE_NAME.service
+if [[ -z "$SERVICE_NAME" || -z "$SERVICE_EXEC" ]]; then
+    echo "❌ ERROR: You must set environment variables SERVICE_NAME and SERVICE_EXEC first."
+    echo "Example:"
+    echo "  export SERVICE_NAME=myapp"
+    echo "  export SERVICE_EXEC=\"/usr/local/bin/myapp --flag xxx\""
+    exit 1
+fi
+
+SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
+
+echo "📝 Creating systemd service: $SERVICE_FILE"
+
+cat > "$SERVICE_FILE" <<EOF
 [Unit]
-Description=$SERVICE_NAME
+Description=$SERVICE_NAME service
 After=network.target
 
 [Service]
-ExecStart=/bin/sh -c "$COMMAND"
+ExecStart=$SERVICE_EXEC
 Restart=always
+RestartSec=5
+User=root
+WorkingDirectory=/root
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
+echo "✅ Service file created: $SERVICE_FILE"
+
+# Reload systemd and enable service
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
-systemctl start "$SERVICE_NAME"
+systemctl restart "$SERVICE_NAME"
 
-echo "$SERVICE_NAME installed and started!"
+echo "🚀 $SERVICE_NAME has been installed and started."
+systemctl status "$SERVICE_NAME" --no-pager
