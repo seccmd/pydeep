@@ -5,15 +5,24 @@
 ## Linux 客户端 一键自动部署
 
 ```bash
-# linux install easytier
+# linux easytier download
 # InstDir: /opt/EasyTier/easytier-linux-x86_64
 curl -sfL http://seccmd.net/tld/script/install-easytier.sh | sh -
 
-# linux service easytier
+# linux easytier install service
 # Configfile: /etc/systemd/system/easytier.service
 curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | \
  NAME=easytier \
  EXEC_CMD="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret" sh -
+```
+
+## Windows 客户端 一键自动部署
+
+```powershell
+# Install Windows service
+New-Service -Name easytier -StartupType Automatic -BinaryPathName "D:\easytier\easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret"
+
+Start-Service easytier
 ```
 
 ## 自建服务端操作
