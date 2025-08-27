@@ -9,11 +9,11 @@
 # InstDir: /opt/EasyTier/easytier-linux-x86_64
 curl -sfL http://seccmd.net/tld/script/install-easytier.sh | sh -
 
-# linux easytier install service
-# Configfile: /etc/systemd/system/easytier.service
-curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | \
- NAME=easytier \
- EXEC_CMD="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret" sh -
+# linux service easytier
+# Conf: /etc/systemd/system/easytier.service
+export SERVICE_NAME=easytier
+export SERVICE_EXEC="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret"
+curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | sh -
 ```
 
 ## Windows 客户端 一键自动部署
