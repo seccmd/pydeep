@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Generic Linux systemd service installer
+# Generic Linux systemd service installer (POSIX sh compatible)
 # Usage:
 #   export SERVICE_NAME=easytier
 #   export SERVICE_EXEC="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010"
@@ -9,7 +9,7 @@
 
 set -e
 
-if [[ -z "$SERVICE_NAME" || -z "$SERVICE_EXEC" ]]; then
+if [ -z "$SERVICE_NAME" ] || [ -z "$SERVICE_EXEC" ]; then
     echo "❌ ERROR: You must set environment variables SERVICE_NAME and SERVICE_EXEC first."
     echo "Example:"
     echo "  export SERVICE_NAME=myapp"
