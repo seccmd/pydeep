@@ -11,7 +11,10 @@ docsify 可以快速帮你生成文档网站。 不同于 GitBook 的地方是�
 
 ## 导航
 
-- [ChatGPT](https://chatgpt.com/) | [Grok](https://grok.com/) | [DeepSeek](https://www.deepseek.com/) | [Qwen](https://chat.qwen.ai/) | [YuanBao](https://yuanbao.tencent.com/)
+- [ChatGPT](https://chatgpt.com/) | [Grok](https://grok.com/) | [Gemini](https://gemini.google.com/) | [Claude](https://claude.ai/) | 
+- [DeepSeek](https://www.deepseek.com/) | [Qwen](https://chat.qwen.ai/) | [YuanBao](https://yuanbao.tencent.com/) | [Kimi](https://www.kimi.com/) | [Z.ai](https://chat.z.ai/)
+
+---
 
 ### == 密码管理器 ==
 
