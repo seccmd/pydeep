@@ -21,6 +21,14 @@ docsify 可以快速帮你生成文档网站。 不同于 GitBook 的地方是�
 
 - [Folo](https://app.follow.is/)
 
+--- 
+
+### == 编辑器 ==
+
+- [Zettlr](https://www.zettlr.com/) | [Zotero](https://www.zotero.org/) | [Lapce](https://lap.dev/lapce/) | [Marktext](https://github.com/marktext/marktext/) | [VSCodium](https://vscodium.com/)
+
+-  [Tauri - cross-platform applications](https://tauri.app/)
+
 ## 示例
 
 可以查看 [Showcase](https://github.com/docsifyjs/docsify/#showcase) 来了解更多在使用 docsify 的文档项目。
