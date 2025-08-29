@@ -11,11 +11,11 @@ docsify 可以快速帮你生成文档网站。 不同于 GitBook 的地方是�
 
 ## 导航
 
-- (chatgpt.com)
+- [chatgpt.com]
 
 ### == 密码管理器 ==
 
-- [Bitwarden ](https://vault.bitwarden.com/)
+- [Bitwarden](https://vault.bitwarden.com/)
 
 --- 
 
