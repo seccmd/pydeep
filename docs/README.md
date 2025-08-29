@@ -9,14 +9,11 @@ docsify 可以快速帮你生成文档网站。 不同于 GitBook 的地方是�
 
 查看[快速开始](https://docsify.js.org/#/zh-cn/)了解详情。
 
-## 特性
+## 导航
 
-- 没有静态生成的 html 文件
-- 简单和轻量
-- 智能的全文搜索
-- 提供多套主题
-- 丰富的 API
-- 支持 Emoji
+### 密码管理器
+
+- [Bitwarden ](https://vault.bitwarden.com/)
 
 ## 示例
 
