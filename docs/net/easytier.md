@@ -20,9 +20,14 @@ curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | sh -
 
 ```powershell
 # Install Windows service
-New-Service -Name easytier -StartupType Automatic -BinaryPathName "D:\easytier\easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret"
-
+New-Service -Name easytier -StartupType Automatic -BinaryPathName "D:\easytier\easytier-core -d -p tcp://IP:11010 -p udp://IP:11010 --network-name my-network --network-secret my-secret"
 Start-Service easytier
+
+# 删除服务
+# 首先停止服务（如果它正在运行）
+Stop-Service -Name easytier -Force
+# 然后删除服务
+sc.exe delete easytier
 ```
 
 ## 自建服务端操作
