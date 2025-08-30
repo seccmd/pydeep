@@ -7,7 +7,8 @@
   - [NetBird 网络搭建与使用](net/netbird.md)
   - [批量 IP 操作与管理](net/ip-batch.md)
   - [SOCKS5 代理配置与应用](net/socks5.md)
-  - [FRP](net/frp.md)
+  - [FRP隧道](net/frp.md)
+  - [搭建宽带DDNS](net/ddns.md)
 
 - 链接
 
